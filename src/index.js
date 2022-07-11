@@ -26,6 +26,7 @@ export class Scsaver {
         Wait: Symbol('Wait'),
         Show: Symbol('Show'),
         Hide: Symbol('Hide'),
+        Disabled: Symbol('Disabled'),
     };
 
     eventPrefix = 'scsaver';
@@ -86,6 +87,10 @@ export class Scsaver {
         if (this.settings.on.hideStart) {
             this.on('hideStart', this.settings.on.hideStart);
         }
+
+        if (this.settings.on.disabledStart) {
+            this.on('disabledStart', this.settings.on.disabledStart);
+        }
     }
 
     setStateEvent() {
@@ -111,12 +116,17 @@ export class Scsaver {
                 this.element.dispatchEvent(new CustomEvent('hideStart', { detail: { beforeState: beforeState, currentState: currentState } }));
                 this.hideState();
                 break;
+            case this.states.Disabled:
+                this.element.dispatchEvent(new CustomEvent('disabledStart', { detail: { beforeState: beforeState, currentState: currentState } }));
+                this.disabledState();
+                break;
             case this.states.Default:
             default:
                 break;
         }
     }
 
+    // TODO: private method
     changeState(state) {
         this.beforeState = this.currentState;
         this.currentState = state;
@@ -127,51 +137,79 @@ export class Scsaver {
     start() {
         this.registerDoing();
 
-        this.changeState(this.states.Wait);
+        this.wait();
+
+        this.disabled();
     }
 
     registerDoing() {
         const self = this;
 
         this.settings.events.forEach(function (event) {
-            self.element.addEventListener(event, function () {
-                if (performance.now() - self.lastEventNow <= 1000) return;
-
-                self.doing();
-                self.lastEventNow = performance.now();
-            });
+            self.element.addEventListener(event, self.intervalDoing.bind(self));
         });
     }
 
-    // unregisterDoing() {
-    //     const self = this;
+    unregisterDoing() {
+        const self = this;
 
-    //     this.settings.events.forEach(function (event) {
-    //         document.removeEventListener(event, self.changeDoing);
-    //     });
-    // }
+        this.settings.events.forEach(function (event) {
+            document.removeEventListener(event, self.intervalDoing);
+        });
+    }
+
+    intervalDoing() {
+        if (performance.now() - this.lastEventNow <= 1000) return;
+
+        this.doing();
+        this.lastEventNow = performance.now();
+    }
 
     doing() {
         switch (this.currentState) {
             case this.states.Wait:
                 this.cancelWait();
-                this.changeState(this.states.Wait);
+                this.wait();
                 break;
             case this.states.Show:
                 if (!this.isFadeOut) {
-                    this.changeState(this.states.Hide);
+                    this.hide();
                 }
 
                 break;
             case this.states.Hide:
                 if (this.isHidden) {
-                    this.changeState(this.states.Wait);
+                    this.wait();
                     return;
                 }
                 break;
             case this.states.Default:
             default:
                 break;
+        }
+    }
+
+    disabled() {
+        this.changeState(this.states.Disabled);
+    }
+
+    wait() {
+        this.changeState(this.states.Wait);
+    }
+
+    show() {
+        this.changeState(this.states.Show);
+    }
+
+    hide() {
+        this.changeState(this.states.Hide);
+    }
+
+    disabledState() {
+        this.cancelWait();
+
+        if (this.isShowing) {
+            this.fadeOut();
         }
     }
 
@@ -183,13 +221,31 @@ export class Scsaver {
 
             await this.waiting(this.settings.waitTime, this.waitStateCancelToken);
 
-            this.changeState(this.states.Show);
+            this.show();
 
             this.cancelWait();
         }
         catch (e) {
             // console.log(e.cancelled ? "Waiting is cancelled." : "some other err");
         }
+    }
+
+    async showState() {
+        this.isHidden = false;
+
+        await this.fadeIn(this.element, this.settings.showFadeTime);
+
+        this.isShowing = true;
+    }
+
+    async hideState() {
+        this.isShowing = false;
+
+        await this.fadeOut(this.element, this.settings.hideFadeTime);
+
+        this.isHidden = true;
+
+        this.wait();
     }
 
     cancelWait() {
@@ -216,24 +272,6 @@ export class Scsaver {
                 cancellationToken.register(reject);
             }
         });
-    }
-
-    async showState() {
-        this.isHidden = false;
-
-        await this.fadeIn(this.element, this.settings.showFadeTime);
-
-        this.isShowing = true;
-    }
-
-    async hideState() {
-        this.isShowing = false;
-
-        await this.fadeOut(this.element, this.settings.hideFadeTime);
-
-        this.isHidden = true;
-
-        this.changeState(this.states.Wait);
     }
 
     fadeIn(el, duration = 2000, display, cancellationToken = null) {
