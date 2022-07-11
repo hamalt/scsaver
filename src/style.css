@@ -4,9 +4,10 @@
     left: 0;
     width: 100%;
     height: 100%;
-    display: block;
-    background-color: #ccc;
-    opacity: .85;
+    display: none;
+    color: #fff;
+    background-color: #000;
+    opacity: 0;
 }
 
 .scsaver__inner {
@@ -15,4 +16,23 @@
     align-items: center;
     width: 100%;
     height: 100%;
+}
+
+.scsaver-progress {
+    position: fixed;
+    top: 0;
+    width: 100%;
+}
+
+.scsaver-progress progress {
+    width: 100%;
+}
+
+#monitor {
+    position: fixed;
+    width:200px;
+    height: 400px;
+    overflow: hidden;
+    color: #fff;
+    background-color: #000;
 }

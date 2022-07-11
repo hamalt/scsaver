@@ -18,17 +18,28 @@
         </div>
     </div>
 
+    <div id="monitor">
+        <p><span id=""></span></p>
+    </div>
+
     <script type="module" src="./src/index.js"></script>
 
     <script type="module">
         import { Scsaver } from './src/index.js';
 
         var option = {
-            idleTime : 5,
-            events: ['mousemove']
+            waitTime : 2000,
+            events: ['mousemove'],
+            on: {
+                waitStart: function() {
+                    console.log('waitStart Param');
+                },
+                showStart: function() {
+                    console.log('showStart Param');
+                },
+            }
         }
-        var scsaver = new Scsaver('#scsaver', option);
-        console.log(scsaver.test());
+        var scsaver = new Scsaver('.scsaver', option);
     </script>
 </body>
 </html>
