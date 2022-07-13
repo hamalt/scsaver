@@ -4,10 +4,13 @@ export class Scsaver {
     // Defaults for options
     defaults = {
         timeout: null,
-        waitTime: 3000,
+        waitTime: 3200,
         events: ['keydown', 'mousemove', 'touchstart', 'click'],
         showFadeTime: 1000,
         hideFadeTime: 1000,
+        autoStart: true,
+        doInterval: 200,
+        debug: false,
     };
 
     element;
@@ -25,7 +28,9 @@ export class Scsaver {
         Default: Symbol('Default'),
         Wait: Symbol('Wait'),
         Show: Symbol('Show'),
+        ShowFadeInComplete: Symbol('ShowFadeInComplete'),
         Hide: Symbol('Hide'),
+        HideFadeOut: Symbol('HideFadeOutComplete'),
         Disabled: Symbol('Disabled'),
     };
 
@@ -61,7 +66,9 @@ export class Scsaver {
 
         this.setAddEvents();
 
-        this.start();
+        if (this.settings.autoStart) {
+            this.start();
+        }
     }
 
     setElement() {
@@ -112,9 +119,15 @@ export class Scsaver {
                 this.element.dispatchEvent(new CustomEvent('showStart', { detail: { beforeState: beforeState, currentState: currentState } }));
                 this.showState();
                 break;
+            case this.states.ShowFadeInComplete:
+                this.element.dispatchEvent(new CustomEvent('showFadeInComplete', { detail: { beforeState: beforeState, currentState: currentState } }));
+                break;
             case this.states.Hide:
                 this.element.dispatchEvent(new CustomEvent('hideStart', { detail: { beforeState: beforeState, currentState: currentState } }));
                 this.hideState();
+                break;
+            case this.states.HideFadeOutComplete:
+                this.element.dispatchEvent(new CustomEvent('hideFadeOutComplete', { detail: { beforeState: beforeState, currentState: currentState } }));
                 break;
             case this.states.Disabled:
                 this.element.dispatchEvent(new CustomEvent('disabledStart', { detail: { beforeState: beforeState, currentState: currentState } }));
@@ -138,15 +151,13 @@ export class Scsaver {
         this.registerDoing();
 
         this.wait();
-
-        this.disabled();
     }
 
     registerDoing() {
         const self = this;
 
         this.settings.events.forEach(function (event) {
-            self.element.addEventListener(event, self.intervalDoing.bind(self));
+            window.addEventListener(event, self.intervalDoing.bind(self));
         });
     }
 
@@ -154,12 +165,12 @@ export class Scsaver {
         const self = this;
 
         this.settings.events.forEach(function (event) {
-            document.removeEventListener(event, self.intervalDoing);
+            window.removeEventListener(event, self.intervalDoing);
         });
     }
 
     intervalDoing() {
-        if (performance.now() - this.lastEventNow <= 1000) return;
+        if (performance.now() - this.lastEventNow <= this.settings.doInterval) return;
 
         this.doing();
         this.lastEventNow = performance.now();
@@ -172,12 +183,13 @@ export class Scsaver {
                 this.wait();
                 break;
             case this.states.Show:
-                if (!this.isFadeOut) {
-                    this.hide();
-                }
-
+            case this.states.ShowFadeInComplete:
+                console.log("Start Hide");
+                // TODO: Cancel fade in
+                this.hide();
                 break;
             case this.states.Hide:
+            case this.states.HideFadeOutComplete:
                 if (this.isHidden) {
                     this.wait();
                     return;
@@ -206,12 +218,15 @@ export class Scsaver {
     }
 
     disabledState() {
+        this.unregisterDoing();
         this.cancelWait();
 
         if (this.isShowing) {
+            // TODO: Cancel fade in
             this.fadeOut();
         }
     }
+
 
     async waitState() {
         try {
@@ -226,26 +241,43 @@ export class Scsaver {
             this.cancelWait();
         }
         catch (e) {
-            // console.log(e.cancelled ? "Waiting is cancelled." : "some other err");
+            if (!this.settings.debug) return;
+            console.log(e.cancelled ? "Waiting is cancelled." : "some other err");
         }
     }
 
     async showState() {
-        this.isHidden = false;
+        try {
+            this.isHidden = false;
 
-        await this.fadeIn(this.element, this.settings.showFadeTime);
+            await this.fadeIn(this.element, this.settings.showFadeTime);
 
-        this.isShowing = true;
+            this.changeState(this.states.ShowFadeInComplete);
+
+            this.isShowing = true;
+        }
+        catch (e) {
+            if (!this.settings.debug) return;
+            console.log(e.cancelled ? "Fade in is cancelled." : "some other err");
+        }
     }
 
     async hideState() {
-        this.isShowing = false;
+        try {
+            this.isShowing = false;
 
-        await this.fadeOut(this.element, this.settings.hideFadeTime);
+            await this.fadeOut(this.element, this.settings.hideFadeTime);
 
-        this.isHidden = true;
+            this.changeState(this.states.HideFadeOutComplete);
 
-        this.wait();
+            this.isHidden = true;
+
+            this.wait();
+        }
+        catch (e) {
+            if (!this.settings.debug) return;
+            console.log(e.cancelled ? "Fade out is cancelled." : "some other err");
+        }
     }
 
     cancelWait() {
@@ -262,7 +294,7 @@ export class Scsaver {
         this.isWaiting = true;
 
         return new Promise((resolve, reject) => {
-            this.waitingTimeoutID = setTimeout(() => {
+            this.waitingTimeoutID = setTimeout(function () {
                 // TODO: progress bar should be here
                 this.isWaiting = false;
                 resolve();
