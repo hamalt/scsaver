@@ -22,24 +22,26 @@
         <p><span id=""></span></p>
     </div>
 
-    <script type="module" src="./src/index.js"></script>
+    <!-- <script type="module" src="./src/index.js"></script>
+    <script>
+      console.log(Scsaver);
+    </script> -->
 
-    <script type="module">
-        import { Scsaver } from './src/index.js';
-
-        var option = {
-            waitTime : 2000,
-            events: ['mousemove'],
-            on: {
-                waitStart: function() {
-                    console.log('waitStart Param');
-                },
-                showStart: function() {
-                    console.log('showStart Param');
-                },
-            }
-        }
-        var scsaver = new Scsaver('.scsaver', option);
+    <script src="dist/scsaver.js"></script>
+    <script>
+      const option = {
+          waitTime : 2000,
+          events: ['mousemove'],
+          on: {
+              waitStart: function() {
+                  console.log('waitStart Param');
+              },
+              showStart: function() {
+                  console.log('showStart Param');
+              },
+          }
+      }
+      const scsaver = new Scsaver('.scsaver', option);
     </script>
 </body>
 </html>
