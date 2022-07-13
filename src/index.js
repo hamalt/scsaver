@@ -32,6 +32,7 @@ export class Scsaver {
         Hide: Symbol('Hide'),
         HideFadeOut: Symbol('HideFadeOutComplete'),
         Disabled: Symbol('Disabled'),
+        Enabled: Symbol('Enabled'),
     };
 
     eventPrefix = 'scsaver';
@@ -133,6 +134,10 @@ export class Scsaver {
                 this.element.dispatchEvent(new CustomEvent('disabledStart', { detail: { beforeState: beforeState, currentState: currentState } }));
                 this.disabledState();
                 break;
+            case this.states.Enabled:
+                this.element.dispatchEvent(new CustomEvent('enabledStart', { detail: { beforeState: beforeState, currentState: currentState } }));
+                this.enabledState();
+                break;
             case this.states.Default:
             default:
                 break;
@@ -205,6 +210,10 @@ export class Scsaver {
         this.changeState(this.states.Disabled);
     }
 
+    enabled() {
+        this.changeState(this.states.Enabled);
+    }
+
     wait() {
         this.changeState(this.states.Wait);
     }
@@ -225,6 +234,10 @@ export class Scsaver {
             // TODO: Cancel fade in
             this.fadeOut();
         }
+    }
+
+    enabledState() {
+        this.start();
     }
 
 
