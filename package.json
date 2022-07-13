@@ -1,7 +1,7 @@
 {
   "name": "scsaver",
   "version": "0.1.0",
-  "description": "A Web page screen saver JavaScript Libyrary.",
+  "description": "A Web page screensaver JavaScript Libyrary.",
   "main": "dist/scsaver.cjs.js",
   "module": "dist/scsaver.es.js",
   "browser": "dist/scsaver.js",
