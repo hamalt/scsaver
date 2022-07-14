@@ -82,23 +82,11 @@ export default class Scsaver {
     }
 
     setAddEvents() {
-        if (!this.settings.on) return;
+      if (!this.settings.on) return;
 
-        if (this.settings.on.waitStart) {
-            this.on('waitStart', this.settings.on.waitStart);
-        }
-
-        if (this.settings.on.showStart) {
-            this.on('showStart', this.settings.on.showStart);
-        }
-
-        if (this.settings.on.hideStart) {
-            this.on('hideStart', this.settings.on.hideStart);
-        }
-
-        if (this.settings.on.disabledStart) {
-            this.on('disabledStart', this.settings.on.disabledStart);
-        }
+      for (let key in this.settings.on){
+        this.on(key, this.settings.on[key]);
+      }
     }
 
     setStateEvent() {
