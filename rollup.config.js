@@ -1,6 +1,3 @@
-// minify
-// import { terser as pluginTerser } from 'rollup-plugin-terser'
-
 // CommonJS
 import pluginCommonjs from '@rollup/plugin-commonjs';
 
