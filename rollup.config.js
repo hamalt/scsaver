@@ -1,5 +1,5 @@
 // minify
-import { terser as pluginTerser } from 'rollup-plugin-terser'
+// import { terser as pluginTerser } from 'rollup-plugin-terser'
 
 // CommonJS
 import pluginCommonjs from '@rollup/plugin-commonjs';
@@ -9,11 +9,15 @@ import pluginNodeResolve from '@rollup/plugin-node-resolve';
 
 // transpile
 import { babel as pluginBabel } from '@rollup/plugin-babel';
+
+// esbuild
+import esbuild from 'rollup-plugin-esbuild';
+
 import * as path from 'path';
 
 import pkg from './package.json';
 
-
+const production = !process.env.ROLLUP_WATCH;
 const moduleName = pkg.name.replace(/^@.*\//, '');
 const moduleNameUpper = moduleName.charAt(0).toUpperCase() + moduleName.slice(1);
 
@@ -48,12 +52,14 @@ export default [
         sourcemap: 'inline',
         banner,
         plugins: [
-          pluginTerser(),
+          esbuild({
+            sourceMap: !production,
+            minify: production,
+          }),
         ],
       }
     ],
     plugins: [
-      // pluginTypescript(),
       pluginCommonjs({
         extensions: ['.js', '.ts'],
       }),
@@ -84,7 +90,6 @@ export default [
       ...Object.keys(pkg.devDependencies || {}),
     ],
     plugins: [
-      // pluginTypescript(),
       pluginCommonjs({
         extensions: ['.js', '.ts'],
       }),
@@ -115,7 +120,6 @@ export default [
       ...Object.keys(pkg.devDependencies || {}),
     ],
     plugins: [
-      // pluginTypescript(),
       pluginCommonjs({
         extensions: ['.js', '.ts'],
       }),
