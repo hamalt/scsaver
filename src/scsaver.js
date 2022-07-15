@@ -59,19 +59,19 @@ export default class Scsaver {
   }
 
   init() {
-    this.setElement();
+    this.initElement();
 
     // create scsaver event
-    this.setStateEvent();
+    this.initStateEvent();
 
-    this.setAddEvents();
+    this.initAddEvents();
 
     if (this.settings.autoStart) {
       this.start();
     }
   }
 
-  setElement() {
+  initElement() {
     // only one element
     this.element = document.querySelector(this.selector);
 
@@ -80,7 +80,16 @@ export default class Scsaver {
     }
   }
 
-  setAddEvents() {
+  initStateEvent() {
+    this.stateEventName = `${this.eventPrefix}ChangeState`;
+    const self = this;
+
+    this.element.addEventListener(this.stateEventName, (e) => {
+      self.stateController(e.detail.beforeState, e.detail.currentState);
+    });
+  }
+
+  initAddEvents() {
     if (!this.settings.on) return;
 
     for (let key in this.settings.on) {
@@ -88,13 +97,16 @@ export default class Scsaver {
     }
   }
 
-  setStateEvent() {
-    this.stateEventName = `${this.eventPrefix}ChangeState`;
-    const self = this;
+  // TODO: private method
+  changeState(state) {
+    this.beforeState = this.currentState;
+    this.currentState = state;
 
-    this.element.addEventListener(this.stateEventName, (e) => {
-      self.stateController(e.detail.beforeState, e.detail.currentState);
-    });
+    this.element.dispatchEvent(
+      new CustomEvent(`${this.stateEventName}`, {
+        detail: { beforeState: this.beforeState, currentState: this.currentState }
+      })
+    );
   }
 
   stateController(beforeState, currentState) {
@@ -145,18 +157,6 @@ export default class Scsaver {
     }
   }
 
-  // TODO: private method
-  changeState(state) {
-    this.beforeState = this.currentState;
-    this.currentState = state;
-
-    this.element.dispatchEvent(
-      new CustomEvent(`${this.stateEventName}`, {
-        detail: { beforeState: this.beforeState, currentState: this.currentState }
-      })
-    );
-  }
-
   start() {
     this.registerDoing();
 
@@ -199,10 +199,7 @@ export default class Scsaver {
         break;
       case this.states.Hide:
       case this.states.HideFadeOutComplete:
-        if (this.isHidden) {
-          this.wait();
-          return;
-        }
+        if (this.isHidden) this.wait();
         break;
       case this.states.Default:
       default:

@@ -8,6 +8,7 @@
   "scripts": {
     "dev": "rollup -c -w",
     "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "eslint --cache --fix src/",
     "lint-fix": "eslint --cache --fix src/ && prettier --write src/"
   },
   "repository": {
