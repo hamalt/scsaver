@@ -6,7 +6,7 @@
   "module": "dist/scsaver.es.js",
   "browser": "dist/scsaver.js",
   "scripts": {
-    "build": "rollup -c",
+    "build": "rollup -c -w",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -29,6 +29,8 @@
     "esbuild": "^0.14.49",
     "rollup": "^2.76.0",
     "rollup-plugin-esbuild": "^4.9.1",
+    "rollup-plugin-livereload": "^2.0.5",
+    "rollup-plugin-serve": "^2.0.0",
     "tslib": "^2.4.0"
   },
   "dependencies": {}

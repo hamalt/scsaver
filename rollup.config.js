@@ -1,14 +1,9 @@
-// CommonJS
 import pluginCommonjs from '@rollup/plugin-commonjs';
-
-// third-party libraries
 import pluginNodeResolve from '@rollup/plugin-node-resolve';
-
-// transpile
 import { babel as pluginBabel } from '@rollup/plugin-babel';
-
-// esbuild
 import esbuild from 'rollup-plugin-esbuild';
+import livereload from 'rollup-plugin-livereload';
+import serve from 'rollup-plugin-serve'
 
 import * as path from 'path';
 
@@ -66,6 +61,10 @@ export default [
       }),
       pluginNodeResolve({
         browser: true,
+      }),
+      serve('./'),
+      livereload({
+        watch: 'dist',
       }),
     ],
   },
