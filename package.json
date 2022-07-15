@@ -9,7 +9,9 @@
     "dev": "rollup -c -w",
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "eslint --cache --fix src/",
-    "lint-fix": "eslint --cache --fix src/ && prettier --write src/"
+    "lint-fix": "eslint --cache --fix src/ && prettier --write src/",
+    "doc-html" : "documentation build src/** -f html -o docs",
+    "doc-md" : "documentation build src/** -f md -o docs.md"
   },
   "repository": {
     "type": "git",
@@ -30,6 +32,7 @@
     "@rollup/plugin-commonjs": "^22.0.1",
     "@rollup/plugin-eslint": "^8.0.2",
     "@rollup/plugin-node-resolve": "^13.3.0",
+    "documentation": "^13.2.5",
     "esbuild": "^0.14.49",
     "eslint": "^8.19.0",
     "eslint-config-prettier": "^8.5.0",
