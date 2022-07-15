@@ -64,7 +64,9 @@ export default [
         browser: true,
       }),
       eslint({}),
-      serve('./'),
+      serve({
+        open: true,
+      }),
       livereload({
         watch: 'dist',
       }),
