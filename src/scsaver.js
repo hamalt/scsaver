@@ -1,374 +1,388 @@
 import { CancellationToken } from './modules/cancellationToken.js';
 
 export default class Scsaver {
-    // Defaults for options
-    defaults = {
-        timeout: null,
-        waitTime: 3200,
-        events: ['keydown', 'mousemove', 'touchstart', 'click'],
-        showFadeTime: 1000,
-        hideFadeTime: 1000,
-        autoStart: true,
-        doInterval: 200,
-        debug: false,
-    };
+  // Defaults for options
+  defaults = {
+    timeout: null,
+    waitTime: 3200,
+    events: ['keydown', 'mousemove', 'touchstart', 'click'],
+    showFadeTime: 1000,
+    hideFadeTime: 1000,
+    autoStart: true,
+    doInterval: 200,
+    debug: false
+  };
 
-    element;
-    selector = '#scsaver';
-    waitStateCancelToken = null;
-    waitingTimeoutID = null;
+  element;
+  selector = '#scsaver';
+  waitStateCancelToken = null;
+  waitingTimeoutID = null;
 
-    isWaiting = false;
-    isShowing = false;
-    isHidden = true;
-    isFadeIn = false;
-    isFadeOut = false;
+  isWaiting = false;
+  isShowing = false;
+  isHidden = true;
+  isFadeIn = false;
+  isFadeOut = false;
 
-    states = {
-        Default: Symbol('Default'),
-        Wait: Symbol('Wait'),
-        Show: Symbol('Show'),
-        ShowFadeInComplete: Symbol('ShowFadeInComplete'),
-        Hide: Symbol('Hide'),
-        HideFadeOut: Symbol('HideFadeOutComplete'),
-        Disabled: Symbol('Disabled'),
-        Enabled: Symbol('Enabled'),
-    };
+  states = {
+    Default: Symbol('Default'),
+    Wait: Symbol('Wait'),
+    Show: Symbol('Show'),
+    ShowFadeInComplete: Symbol('ShowFadeInComplete'),
+    Hide: Symbol('Hide'),
+    HideFadeOut: Symbol('HideFadeOutComplete'),
+    Disabled: Symbol('Disabled'),
+    Enabled: Symbol('Enabled')
+  };
 
-    eventPrefix = 'scsaver';
-    beforeState = this.states.Default;
-    currentState = this.states.Default;
-    stateEventName = '';
-    lastEventNow = 0;
+  eventPrefix = 'scsaver';
+  beforeState = this.states.Default;
+  currentState = this.states.Default;
+  stateEventName = '';
+  lastEventNow = 0;
 
-    constructor(...args) {
-        // Merge options
-        this.settings = { ...this.defaults, ...args[1] };
+  constructor(...args) {
+    // Merge options
+    this.settings = { ...this.defaults, ...args[1] };
 
-        this.selector = args[0] || this.selector;
+    this.selector = args[0] || this.selector;
 
-        // Scsaver Instance
-        const scsaver = this;
+    // Scsaver Instance
+    const scsaver = this;
 
-        this.init();
+    this.init();
 
-        return scsaver;
+    return scsaver;
+  }
+
+  on(event, callback) {
+    this.element.addEventListener(event, callback);
+  }
+
+  init() {
+    this.setElement();
+
+    // create scsaver event
+    this.setStateEvent();
+
+    this.setAddEvents();
+
+    if (this.settings.autoStart) {
+      this.start();
     }
+  }
 
-    on(event, callback) {
-        this.element.addEventListener(event, callback);
+  setElement() {
+    // only one element
+    this.element = document.querySelector(this.selector);
+
+    if (null === this.element) {
+      throw Error('Scsaver element not found.');
     }
+  }
 
-    init() {
-        this.setElement();
+  setAddEvents() {
+    if (!this.settings.on) return;
 
-        // create scsaver event
-        this.setStateEvent();
-
-        this.setAddEvents();
-
-        if (this.settings.autoStart) {
-            this.start();
-        }
+    for (let key in this.settings.on) {
+      this.on(key, this.settings.on[key]);
     }
+  }
 
-    setElement() {
-        // only one element
-        this.element = document.querySelector(this.selector);
+  setStateEvent() {
+    this.stateEventName = `${this.eventPrefix}ChangeState`;
+    const self = this;
 
-        if (null === this.element) {
-            throw Error("Scsaver element not found.");
-        }
+    this.element.addEventListener(this.stateEventName, (e) => {
+      self.stateController(e.detail.beforeState, e.detail.currentState);
+    });
+  }
+
+  stateController(beforeState, currentState) {
+    switch (currentState) {
+      case this.states.Wait:
+        this.element.dispatchEvent(
+          new CustomEvent('waitStart', { detail: { beforeState: beforeState, currentState: currentState } })
+        );
+        this.waitState();
+        break;
+      case this.states.Show:
+        this.element.dispatchEvent(
+          new CustomEvent('showStart', { detail: { beforeState: beforeState, currentState: currentState } })
+        );
+        this.showState();
+        break;
+      case this.states.ShowFadeInComplete:
+        this.element.dispatchEvent(
+          new CustomEvent('showFadeInComplete', { detail: { beforeState: beforeState, currentState: currentState } })
+        );
+        break;
+      case this.states.Hide:
+        this.element.dispatchEvent(
+          new CustomEvent('hideStart', { detail: { beforeState: beforeState, currentState: currentState } })
+        );
+        this.hideState();
+        break;
+      case this.states.HideFadeOutComplete:
+        this.element.dispatchEvent(
+          new CustomEvent('hideFadeOutComplete', { detail: { beforeState: beforeState, currentState: currentState } })
+        );
+        break;
+      case this.states.Disabled:
+        this.element.dispatchEvent(
+          new CustomEvent('disabledStart', { detail: { beforeState: beforeState, currentState: currentState } })
+        );
+        this.disabledState();
+        break;
+      case this.states.Enabled:
+        this.element.dispatchEvent(
+          new CustomEvent('enabledStart', { detail: { beforeState: beforeState, currentState: currentState } })
+        );
+        this.enabledState();
+        break;
+      case this.states.Default:
+      default:
+        break;
     }
+  }
 
-    setAddEvents() {
-      if (!this.settings.on) return;
+  // TODO: private method
+  changeState(state) {
+    this.beforeState = this.currentState;
+    this.currentState = state;
 
-      for (let key in this.settings.on){
-        this.on(key, this.settings.on[key]);
-      }
-    }
+    this.element.dispatchEvent(
+      new CustomEvent(`${this.stateEventName}`, {
+        detail: { beforeState: this.beforeState, currentState: this.currentState }
+      })
+    );
+  }
 
-    setStateEvent() {
-        this.stateEventName = `${this.eventPrefix}ChangeState`;
-        const self = this;
+  start() {
+    this.registerDoing();
 
-        this.element.addEventListener(this.stateEventName, (e) => {
-            self.stateController(e.detail.beforeState, e.detail.currentState);
-        });
-    }
+    this.wait();
+  }
 
-    stateController(beforeState, currentState) {
-        switch (currentState) {
-            case this.states.Wait:
-                this.element.dispatchEvent(new CustomEvent('waitStart', { detail: { beforeState: beforeState, currentState: currentState } }));
-                this.waitState();
-                break;
-            case this.states.Show:
-                this.element.dispatchEvent(new CustomEvent('showStart', { detail: { beforeState: beforeState, currentState: currentState } }));
-                this.showState();
-                break;
-            case this.states.ShowFadeInComplete:
-                this.element.dispatchEvent(new CustomEvent('showFadeInComplete', { detail: { beforeState: beforeState, currentState: currentState } }));
-                break;
-            case this.states.Hide:
-                this.element.dispatchEvent(new CustomEvent('hideStart', { detail: { beforeState: beforeState, currentState: currentState } }));
-                this.hideState();
-                break;
-            case this.states.HideFadeOutComplete:
-                this.element.dispatchEvent(new CustomEvent('hideFadeOutComplete', { detail: { beforeState: beforeState, currentState: currentState } }));
-                break;
-            case this.states.Disabled:
-                this.element.dispatchEvent(new CustomEvent('disabledStart', { detail: { beforeState: beforeState, currentState: currentState } }));
-                this.disabledState();
-                break;
-            case this.states.Enabled:
-                this.element.dispatchEvent(new CustomEvent('enabledStart', { detail: { beforeState: beforeState, currentState: currentState } }));
-                this.enabledState();
-                break;
-            case this.states.Default:
-            default:
-                break;
-        }
-    }
+  registerDoing() {
+    const self = this;
 
-    // TODO: private method
-    changeState(state) {
-        this.beforeState = this.currentState;
-        this.currentState = state;
+    this.settings.events.forEach(function (event) {
+      window.addEventListener(event, self.intervalDoing.bind(self));
+    });
+  }
 
-        this.element.dispatchEvent(new CustomEvent(`${this.stateEventName}`, { detail: { beforeState: this.beforeState, currentState: this.currentState } }));
-    }
+  unregisterDoing() {
+    const self = this;
 
-    start() {
-        this.registerDoing();
+    this.settings.events.forEach(function (event) {
+      window.removeEventListener(event, self.intervalDoing);
+    });
+  }
 
-        this.wait();
-    }
+  intervalDoing() {
+    if (performance.now() - this.lastEventNow <= this.settings.doInterval) return;
 
-    registerDoing() {
-        const self = this;
+    this.doing();
+    this.lastEventNow = performance.now();
+  }
 
-        this.settings.events.forEach(function (event) {
-            window.addEventListener(event, self.intervalDoing.bind(self));
-        });
-    }
-
-    unregisterDoing() {
-        const self = this;
-
-        this.settings.events.forEach(function (event) {
-            window.removeEventListener(event, self.intervalDoing);
-        });
-    }
-
-    intervalDoing() {
-        if (performance.now() - this.lastEventNow <= this.settings.doInterval) return;
-
-        this.doing();
-        this.lastEventNow = performance.now();
-    }
-
-    doing() {
-        switch (this.currentState) {
-            case this.states.Wait:
-                this.cancelWait();
-                this.wait();
-                break;
-            case this.states.Show:
-            case this.states.ShowFadeInComplete:
-                // TODO: Cancel fade in
-                this.hide();
-                break;
-            case this.states.Hide:
-            case this.states.HideFadeOutComplete:
-                if (this.isHidden) {
-                    this.wait();
-                    return;
-                }
-                break;
-            case this.states.Default:
-            default:
-                break;
-        }
-    }
-
-    disabled() {
-        this.changeState(this.states.Disabled);
-    }
-
-    enabled() {
-        this.changeState(this.states.Enabled);
-    }
-
-    wait() {
-        this.changeState(this.states.Wait);
-    }
-
-    show() {
-        this.changeState(this.states.Show);
-    }
-
-    hide() {
-        this.changeState(this.states.Hide);
-    }
-
-    disabledState() {
-        this.unregisterDoing();
+  doing() {
+    switch (this.currentState) {
+      case this.states.Wait:
         this.cancelWait();
-
-        if (this.isShowing) {
-            // TODO: Cancel fade in
-            this.fadeOut();
+        this.wait();
+        break;
+      case this.states.Show:
+      case this.states.ShowFadeInComplete:
+        // TODO: Cancel fade in
+        this.hide();
+        break;
+      case this.states.Hide:
+      case this.states.HideFadeOutComplete:
+        if (this.isHidden) {
+          this.wait();
+          return;
         }
+        break;
+      case this.states.Default:
+      default:
+        break;
     }
+  }
 
-    enabledState() {
-        this.start();
+  disabled() {
+    this.changeState(this.states.Disabled);
+  }
+
+  enabled() {
+    this.changeState(this.states.Enabled);
+  }
+
+  wait() {
+    this.changeState(this.states.Wait);
+  }
+
+  show() {
+    this.changeState(this.states.Show);
+  }
+
+  hide() {
+    this.changeState(this.states.Hide);
+  }
+
+  disabledState() {
+    this.unregisterDoing();
+    this.cancelWait();
+
+    if (this.isShowing) {
+      // TODO: Cancel fade in
+      this.fadeOut();
     }
+  }
 
+  enabledState() {
+    this.start();
+  }
 
-    async waitState() {
-        try {
-            if (this.isWaiting) return;
+  async waitState() {
+    try {
+      if (this.isWaiting) return;
 
-            this.waitStateCancelToken = new CancellationToken();
+      this.waitStateCancelToken = new CancellationToken();
 
-            await this.waiting(this.settings.waitTime, this.waitStateCancelToken);
+      await this.waiting(this.settings.waitTime, this.waitStateCancelToken);
 
-            this.show();
+      this.show();
 
-            this.cancelWait();
-        }
-        catch (e) {
-            if (!this.settings.debug) return;
-            console.log(e.cancelled ? "Waiting is cancelled." : "some other err");
-        }
+      this.cancelWait();
+    } catch (e) {
+      if (!this.settings.debug) return;
+      console.log(e.cancelled ? 'Waiting is cancelled.' : 'some other err');
     }
+  }
 
-    async showState() {
-        try {
-            this.isHidden = false;
+  async showState() {
+    try {
+      this.isHidden = false;
 
-            await this.fadeIn(this.element, this.settings.showFadeTime);
+      await this.fadeIn(this.element, this.settings.showFadeTime);
 
-            this.changeState(this.states.ShowFadeInComplete);
+      this.changeState(this.states.ShowFadeInComplete);
 
-            this.isShowing = true;
-        }
-        catch (e) {
-            if (!this.settings.debug) return;
-            console.log(e.cancelled ? "Fade in is cancelled." : "some other err");
-        }
+      this.isShowing = true;
+    } catch (e) {
+      if (!this.settings.debug) return;
+      console.log(e.cancelled ? 'Fade in is cancelled.' : 'some other err');
     }
+  }
 
-    async hideState() {
-        try {
-            this.isShowing = false;
+  async hideState() {
+    try {
+      this.isShowing = false;
 
-            await this.fadeOut(this.element, this.settings.hideFadeTime);
+      await this.fadeOut(this.element, this.settings.hideFadeTime);
 
-            this.changeState(this.states.HideFadeOutComplete);
+      this.changeState(this.states.HideFadeOutComplete);
 
-            this.isHidden = true;
+      this.isHidden = true;
 
-            this.wait();
-        }
-        catch (e) {
-            if (!this.settings.debug) return;
-            console.log(e.cancelled ? "Fade out is cancelled." : "some other err");
-        }
+      this.wait();
+    } catch (e) {
+      if (!this.settings.debug) return;
+      console.log(e.cancelled ? 'Fade out is cancelled.' : 'some other err');
     }
+  }
 
-    cancelWait() {
-        if (this.waitStateCancelToken == null) return;
+  cancelWait() {
+    if (this.waitStateCancelToken == null) return;
 
-        this.waitStateCancelToken.cancel();
-        this.waitStateCancelToken = null;
+    this.waitStateCancelToken.cancel();
+    this.waitStateCancelToken = null;
 
-        clearTimeout(this.waitingTimeoutID);
+    clearTimeout(this.waitingTimeoutID);
+    this.isWaiting = false;
+  }
+
+  waiting(time, cancellationToken = null) {
+    this.isWaiting = true;
+
+    return new Promise((resolve, reject) => {
+      this.waitingTimeoutID = setTimeout(function () {
+        // TODO: progress bar should be here
         this.isWaiting = false;
-    }
+        resolve();
+      }, time);
 
-    waiting(time, cancellationToken = null) {
-        this.isWaiting = true;
+      if (cancellationToken) {
+        cancellationToken.register(reject);
+      }
+    });
+  }
 
-        return new Promise((resolve, reject) => {
-            this.waitingTimeoutID = setTimeout(function () {
-                // TODO: progress bar should be here
-                this.isWaiting = false;
-                resolve();
-            }, time);
+  fadeIn(el, duration = 2000, display, cancellationToken = null) {
+    this.isFadeIn = true;
+    const defaultOpacity = parseFloat(window.getComputedStyle(el).opacity);
+    const finalOpacity = 1;
+    const start = performance.now();
+    const self = this;
 
-            if (cancellationToken) {
-                cancellationToken.register(reject);
-            }
-        });
-    }
+    el.style.opacity = defaultOpacity;
+    el.style.display = display || 'block';
 
-    fadeIn(el, duration = 2000, display, cancellationToken = null) {
-        this.isFadeIn = true;
-        const defaultOpacity = parseFloat(window.getComputedStyle(el).opacity);
-        const finalOpacity = 1;
-        const start = performance.now();
-        const self = this;
+    return new Promise((resolve, reject) => {
+      requestAnimationFrame(function fade(time) {
+        let timeFraction = (time - start) / duration;
+        let progress = Math.min(timeFraction, 1);
 
-        el.style.opacity = defaultOpacity;
-        el.style.display = display || 'block';
+        el.style.opacity = defaultOpacity + (finalOpacity - defaultOpacity) * progress;
 
-        return new Promise((resolve, reject) => {
-            requestAnimationFrame(function fade(time) {
-                let timeFraction = (time - start) / duration;
-                let progress = Math.min(timeFraction, 1);
+        if (+el.style.opacity < finalOpacity) {
+          requestAnimationFrame(fade);
+        } else {
+          el.classList.add('is-fade-in-done');
+          el.classList.remove('is-fade-out-done');
+          self.isFadeIn = false;
+          resolve();
+        }
 
-                el.style.opacity = defaultOpacity + (finalOpacity - defaultOpacity) * progress;
+        if (cancellationToken) {
+          cancellationToken.register(reject);
+        }
+      });
+    });
+  }
 
-                if (+el.style.opacity < finalOpacity) {
-                    requestAnimationFrame(fade);
-                } else {
-                    el.classList.add('is-fade-in-done');
-                    el.classList.remove('is-fade-out-done');
-                    self.isFadeIn = false;
-                    resolve();
-                }
+  fadeOut(el, duration = 2000, cancellationToken = null) {
+    this.isFadeOut = true;
+    const defaultOpacity = parseFloat(window.getComputedStyle(el).opacity);
+    const finalOpacity = 0;
+    const start = performance.now();
+    const self = this;
 
-                if (cancellationToken) {
-                    cancellationToken.register(reject);
-                }
-            });
-        });
-    }
+    return new Promise((resolve, reject) => {
+      requestAnimationFrame(function fade(time) {
+        let timeFraction = (time - start) / duration;
+        let progress = Math.min(timeFraction, 1);
 
-    fadeOut(el, duration = 2000, cancellationToken = null) {
-        this.isFadeOut = true;
-        const defaultOpacity = parseFloat(window.getComputedStyle(el).opacity);
-        const finalOpacity = 0;
-        const start = performance.now();
-        const self = this;
+        el.style.opacity = defaultOpacity - defaultOpacity * progress;
 
-        return new Promise((resolve, reject) => {
-            requestAnimationFrame(function fade(time) {
-                let timeFraction = (time - start) / duration;
-                let progress = Math.min(timeFraction, 1);
+        if (+el.style.opacity > finalOpacity) {
+          requestAnimationFrame(fade);
+        } else {
+          el.style.display = 'none';
+          el.classList.add('is-fade-out-done');
+          el.classList.remove('is-fade-in-done');
+          self.isFadeOut = false;
+          resolve();
+        }
 
-                el.style.opacity = defaultOpacity - defaultOpacity * progress;
+        if (cancellationToken) {
+          cancellationToken.register(reject);
+        }
+      });
+    });
+  }
 
-                if (+el.style.opacity > finalOpacity) {
-                    requestAnimationFrame(fade);
-                } else {
-                    el.style.display = "none";
-                    el.classList.add('is-fade-out-done');
-                    el.classList.remove('is-fade-in-done');
-                    self.isFadeOut = false;
-                    resolve();
-                }
-
-                if (cancellationToken) {
-                    cancellationToken.register(reject);
-                }
-            });
-        });
-    }
-
-    // TODO: cancel fadeIn and fadeOut functions
-};
+  // TODO: cancel fadeIn and fadeOut functions
+}

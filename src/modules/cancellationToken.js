@@ -1,19 +1,18 @@
 export class CancellationToken {
-
   isCancellationRequested = false;
 
   constructor(parentToken = null) {
-    this.cancellationPromise = new Promise(resolve => {
-      this.cancel = e => {
+    this.cancellationPromise = new Promise((resolve) => {
+      this.cancel = (e) => {
         this.isCancellationRequested = true;
         if (e) {
           resolve(e);
         } else {
-          var err = new Error("cancelled");
+          var err = new Error('cancelled');
           err.cancelled = true;
           resolve(err);
         }
-      }
+      };
     });
     if (parentToken && parentToken instanceof CancellationToken) {
       parentToken.register(this.cancel);
@@ -27,5 +26,4 @@ export class CancellationToken {
   createDependentToken() {
     return new CancellationToken(this);
   }
-
 }
