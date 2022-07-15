@@ -3,7 +3,8 @@ import pluginNodeResolve from '@rollup/plugin-node-resolve';
 import { babel as pluginBabel } from '@rollup/plugin-babel';
 import esbuild from 'rollup-plugin-esbuild';
 import livereload from 'rollup-plugin-livereload';
-import serve from 'rollup-plugin-serve'
+import serve from 'rollup-plugin-serve';
+import eslint from '@rollup/plugin-eslint';
 
 import * as path from 'path';
 
@@ -62,6 +63,7 @@ export default [
       pluginNodeResolve({
         browser: true,
       }),
+      eslint({}),
       serve('./'),
       livereload({
         watch: 'dist',

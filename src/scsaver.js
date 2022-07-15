@@ -12,7 +12,6 @@ export default class Scsaver {
     doInterval: 200,
     debug: false
   };
-
   element;
   selector = '#scsaver';
   waitStateCancelToken = null;
