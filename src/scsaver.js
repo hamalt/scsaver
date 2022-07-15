@@ -1,7 +1,15 @@
 import { CancellationToken } from './modules/cancellationToken.js';
 
+/**
+ * Web page screensaver JavaScript library.
+ * @param  {...any} args Selector, options.
+ * @returns {Scsaver}
+ */
 export default class Scsaver {
-  // Defaults for options
+  /**
+   * Defaults for options.
+   * @type {Object}
+   */
   defaults = {
     timeout: null,
     waitTime: 3200,
@@ -12,7 +20,17 @@ export default class Scsaver {
     doInterval: 200,
     debug: false
   };
+
+  /**
+   * Scsaver element.
+   * @type {Element}
+   */
   element;
+
+  /**
+   * Element default selector.
+   * @type {String}
+   */
   selector = '#scsaver';
   waitStateCancelToken = null;
   waitingTimeoutID = null;
@@ -54,6 +72,11 @@ export default class Scsaver {
     return scsaver;
   }
 
+  /**
+   * Handle event.
+   * @param {*} event 
+   * @param {*} callback 
+   */
   on(event, callback) {
     this.element.addEventListener(event, callback);
   }
@@ -300,6 +323,12 @@ export default class Scsaver {
     this.isWaiting = false;
   }
 
+  /**
+   * Wait for the next process for the specified number of milliseconds.
+   * @param {number} time - The number of milliseconds to wait.
+   * @param {CancellationToken} cancellationToken - The cancellation token.
+   * @returns {Promise<number>}
+   */
   waiting(time, cancellationToken = null) {
     this.isWaiting = true;
 
