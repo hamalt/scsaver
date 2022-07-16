@@ -66,6 +66,7 @@ export default [
       eslint({}),
       serve({
         open: true,
+        openPage: '/demo/demo.html',
       }),
       livereload({
         watch: 'dist',

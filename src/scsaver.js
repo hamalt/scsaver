@@ -58,6 +58,24 @@ export default class Scsaver {
   stateEventName = '';
   lastEventNow = 0;
 
+  /**
+   * Fade in data.
+   * @type {Object}
+   */
+  fadeInData = {
+    animReqID: null,
+    cancelToken: null
+  }
+
+  /**
+   * Fade out data.
+   * @type {Object}
+   */
+  fadeOutData = {
+    animReqID: null,
+    cancelToken: null
+  }
+
   constructor(...args) {
     // Merge options
     this.settings = { ...this.defaults, ...args[1] };
@@ -74,8 +92,8 @@ export default class Scsaver {
 
   /**
    * Handle event.
-   * @param {*} event 
-   * @param {*} callback 
+   * @param {*} event
+   * @param {*} callback
    */
   on(event, callback) {
     this.element.addEventListener(event, callback);
@@ -217,7 +235,7 @@ export default class Scsaver {
         break;
       case this.states.Show:
       case this.states.ShowFadeInComplete:
-        // TODO: Cancel fade in
+        this.cancelFadeIn();
         this.hide();
         break;
       case this.states.Hide:
@@ -255,7 +273,7 @@ export default class Scsaver {
     this.cancelWait();
 
     if (this.isShowing) {
-      // TODO: Cancel fade in
+      this.cancelFadeIn();
       this.fadeOut();
     }
   }
@@ -285,7 +303,11 @@ export default class Scsaver {
     try {
       this.isHidden = false;
 
-      await this.fadeIn(this.element, this.settings.showFadeTime);
+      this.fadeInData.cancelToken = new CancellationToken();
+
+      await this.fadeIn(this.element, this.settings.showFadeTime, 'block', this.fadeInData.cancelToken);
+
+      this.clearFadeIn();
 
       this.changeState(this.states.ShowFadeInComplete);
 
@@ -300,7 +322,11 @@ export default class Scsaver {
     try {
       this.isShowing = false;
 
-      await this.fadeOut(this.element, this.settings.hideFadeTime);
+      this.fadeOutData.cancelToken = new CancellationToken();
+
+      await this.fadeOut(this.element, this.settings.hideFadeTime, this.fadeOutData.cancelToken);
+
+      this.clearFadeOut();
 
       this.changeState(this.states.HideFadeOutComplete);
 
@@ -356,14 +382,14 @@ export default class Scsaver {
     el.style.display = display || 'block';
 
     return new Promise((resolve, reject) => {
-      requestAnimationFrame(function fade(time) {
+      self.fadeInData.animReqID = requestAnimationFrame(function fade(time) {
         let timeFraction = (time - start) / duration;
         let progress = Math.min(timeFraction, 1);
 
         el.style.opacity = defaultOpacity + (finalOpacity - defaultOpacity) * progress;
 
         if (+el.style.opacity < finalOpacity) {
-          requestAnimationFrame(fade);
+          self.fadeInData.animReqID = requestAnimationFrame(fade);
         } else {
           el.classList.add('is-fade-in-done');
           el.classList.remove('is-fade-out-done');
@@ -386,14 +412,14 @@ export default class Scsaver {
     const self = this;
 
     return new Promise((resolve, reject) => {
-      requestAnimationFrame(function fade(time) {
+      self.fadeOutData.animReqID = requestAnimationFrame(function fade(time) {
         let timeFraction = (time - start) / duration;
         let progress = Math.min(timeFraction, 1);
 
         el.style.opacity = defaultOpacity - defaultOpacity * progress;
 
         if (+el.style.opacity > finalOpacity) {
-          requestAnimationFrame(fade);
+          self.fadeOutData.animReqID = requestAnimationFrame(fade);
         } else {
           el.style.display = 'none';
           el.classList.add('is-fade-out-done');
@@ -409,5 +435,45 @@ export default class Scsaver {
     });
   }
 
-  // TODO: cancel fadeIn and fadeOut functions
+  clearFadeIn() {
+    this.fadeInData.cancelToken = null;
+    this.fadeInData.animReqID = null;
+  }
+
+  clearFadeOut() {
+    this.fadeOutData.cancelToken = null;
+    this.fadeOutData.animReqID = null;
+  }
+
+  cancelFadeIn() {
+    if (null !== this.fadeInData.cancelToken) {
+      this.fadeInData.cancelToken.cancel();
+      this.fadeInData.cancelToken = null;
+    }
+
+    if (null !== this.fadeInData.animReqID) {
+      cancelAnimationFrame(this.fadeInData.animReqID);
+      this.fadeInData.animReqID = null;
+    }
+
+    if (this.isFadeIn && null == this.fadeInData.cancelToken && null == this.fadeInData.animReqID) {
+      this.isFadeIn = false;
+    }
+  }
+
+  cancelFadeOut() {
+    if (null !== this.fadeOutData.cancelToken) {
+      this.fadeOutData.cancelToken.cancel();
+      this.fadeOutData.cancelToken = null;
+    }
+
+    if (null !== this.fadeOutData.animReqID) {
+      cancelAnimationFrame(this.fadeOutData.animReqID);
+      this.fadeOutData.animReqID = null;
+    }
+
+    if (this.isFadeOut && null == this.fadeOutData.cancelToken && null == this.fadeOutData.animReqID) {
+      this.isFadeOut = false;
+    }
+  }
 }

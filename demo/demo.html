@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 
-    <link rel="stylesheet" href="src/style.css">
+    <link rel="stylesheet" href="../src/style.css">
 </head>
 <body>
     <h1>Hello, Scsaver.</h1>
@@ -27,11 +27,14 @@
       console.log(Scsaver);
     </script> -->
 
-    <script src="dist/scsaver.js"></script>
+    <script src="../dist/scsaver.js"></script>
     <script>
       const option = {
           waitTime : 2000,
-          events: ['mousemove'],
+          events: [
+            'mousemove',
+            'click'
+          ],
           on: {
               waitStart: function() {
                   console.log('waitStart Param');
