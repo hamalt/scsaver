@@ -10,8 +10,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "eslint --cache --fix src/",
     "lint-fix": "eslint --cache --fix src/ && prettier --write src/",
-    "doc-html" : "documentation build src/** -f html -o docs",
-    "doc-md" : "documentation build src/** -f md -o docs.md"
+    "doc-html": "documentation build src/** -f html -o docs",
+    "doc-md": "documentation build src/** -f md -o docs.md"
   },
   "repository": {
     "type": "git",
