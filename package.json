@@ -12,7 +12,7 @@
     "lint-fix": "eslint --cache --fix src/ && prettier --write src/",
     "doc-html": "documentation build src/** -f html -o docs",
     "doc-md": "documentation build src/** -f md -o docs.md",
-    "npm-upgrade" : "yarn upgrade --latest"
+    "npm-upgrade": "yarn upgrade --latest"
   },
   "repository": {
     "type": "git",
