@@ -18,7 +18,8 @@ export default class Scsaver {
     hideFadeTime: 1000,
     autoStart: true,
     doInterval: 200,
-    debug: false
+    debug: false,
+    progressBar: false,
   };
 
   /**
@@ -34,6 +35,7 @@ export default class Scsaver {
   selector = '#scsaver';
   waitStateCancelToken = null;
   waitingTimeoutID = null;
+  waitingAnimID = null;
 
   isWaiting = false;
   isShowing = false;
@@ -57,6 +59,12 @@ export default class Scsaver {
   currentState = this.states.Default;
   stateEventName = '';
   lastEventNow = 0;
+
+  progressBar = {
+    wrapperElement: null,
+    barElement: null,
+    progress: 0,
+  }
 
   /**
    * Fade in data.
@@ -106,6 +114,10 @@ export default class Scsaver {
     this.initStateEvent();
 
     this.initAddEvents();
+
+    if (this.settings.progressBar) {
+      this.initProgressBar();
+    }
 
     if (this.settings.autoStart) {
       this.start();
@@ -196,6 +208,23 @@ export default class Scsaver {
       default:
         break;
     }
+  }
+
+  initProgressBar() {
+    this.progressBar.wrapperElement = document.createElement('div');
+    this.progressBar.wrapperElement.classList.add('scsaver-progress-wrapper');
+
+    const progressBg = document.createElement('div');
+    progressBg.classList.add('scsaver-progress-bg');
+
+    this.progressBar.barElement = document.createElement('div');
+    this.progressBar.barElement.classList.add('scsaver-progress-bar');
+    this.progressBar.barElement.id = 'scsaver-progress-bar';
+
+    progressBg.appendChild(this.progressBar.barElement);
+    this.progressBar.wrapperElement.appendChild(progressBg);
+
+    document.body.appendChild(this.progressBar.wrapperElement);
   }
 
   start() {
@@ -340,12 +369,16 @@ export default class Scsaver {
   }
 
   cancelWait() {
-    if (this.waitStateCancelToken == null) return;
+    if (null !== this.waitStateCancelToken) {
+      this.waitStateCancelToken.cancel();
+      this.waitStateCancelToken = null;
+    }
 
-    this.waitStateCancelToken.cancel();
-    this.waitStateCancelToken = null;
+    if (null !== this.waitingAnimID) {
+      cancelAnimationFrame(this.waitingAnimID);
+      this.waitingAnimID = null;
+    }
 
-    clearTimeout(this.waitingTimeoutID);
     this.isWaiting = false;
   }
 
@@ -355,20 +388,54 @@ export default class Scsaver {
    * @param {CancellationToken} cancellationToken - The cancellation token.
    * @returns {Promise<number>}
    */
-  waiting(time, cancellationToken = null) {
+  waiting(waitTime, cancellationToken = null) {
     this.isWaiting = true;
+    const defaultValue = 0;
+    const finalValue = 1;
+    const start = performance.now();
+    const self = this;
+
+    if (this.settings.progressBar) {
+      this.enabledProgressBar();
+      this.progressBar.barElement.classList.remove('is-filled');
+      this.progressBar.barElement.style.width = `${defaultValue}%`;
+    }
 
     return new Promise((resolve, reject) => {
-      this.waitingTimeoutID = setTimeout(function () {
-        // TODO: progress bar should be here
-        this.isWaiting = false;
-        resolve();
-      }, time);
+      self.waitingAnimID = requestAnimationFrame(function waitingProgress(time) {
+        let timeFraction = (time - start) / waitTime;
+        let progress = Math.min(timeFraction, 1);
 
-      if (cancellationToken) {
-        cancellationToken.register(reject);
-      }
+        if (self.settings.progressBar) {
+          self.progressBar.barElement.style.width = `${progress * 100}%`;
+        }
+
+        if (progress < finalValue) {
+          self.waitingAnimID = requestAnimationFrame(waitingProgress);
+        } else {
+
+          if (self.settings.progressBar) {
+            self.progressBar.barElement.classList.add('is-filled');
+            self.progressBar.wrapperElement.style.display = 'none';
+          }
+
+          self.isWaiting = false;
+          resolve();
+        }
+
+        if (cancellationToken) {
+          cancellationToken.register(reject);
+        }
+      });
     });
+  }
+
+  enabledProgressBar() {
+    this.progressBar.wrapperElement.style.display = 'block';
+  }
+
+  disabledProgressBar() {
+    this.progressBar.wrapperElement.style.display = 'none';
   }
 
   fadeIn(el, duration = 2000, display, cancellationToken = null) {
