@@ -35,7 +35,7 @@
     "@rollup/plugin-node-resolve": "^13.3.0",
     "documentation": "^13.2.5",
     "esbuild": "^0.14.49",
-    "eslint": "^8.19.0",
+    "eslint": "^8.20.0",
     "eslint-config-prettier": "^8.5.0",
     "prettier": "^2.7.1",
     "rollup": "^2.77.0",
