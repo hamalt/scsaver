@@ -11,7 +11,6 @@ export default class Scsaver {
    * @type {Object}
    */
   defaults = {
-    timeout: null,
     waitTime: 3200,
     events: ['keydown', 'mousemove', 'touchstart', 'click'],
     showFadeTime: 1000,
