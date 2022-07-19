@@ -17,8 +17,9 @@ export default class Scsaver {
     hideFadeTime: 1000,
     autoStart: true,
     doInterval: 200,
-    debug: false,
     progressBar: false,
+    progressBarParent: null,
+    debug: false,
   };
 
   /**
