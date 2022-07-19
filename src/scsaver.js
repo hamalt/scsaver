@@ -104,7 +104,7 @@ export default class Scsaver {
    * @param {*} callback
    */
   on(event, callback) {
-    this.element.addEventListener(event, callback);
+    this.element.addEventListener(event, callback.bind(this));
   }
 
   init() {
@@ -118,6 +118,10 @@ export default class Scsaver {
     if (this.settings.progressBar) {
       this.initProgressBar();
     }
+
+    this.element.dispatchEvent(
+      new CustomEvent('init')
+    );
 
     if (this.settings.autoStart) {
       this.start();
@@ -213,6 +217,7 @@ export default class Scsaver {
   initProgressBar() {
     this.progressBar.wrapperElement = document.createElement('div');
     this.progressBar.wrapperElement.classList.add('scsaver-progress-wrapper');
+    this.progressBar.wrapperElement.style.display = 'none';
 
     const progressBg = document.createElement('div');
     progressBg.classList.add('scsaver-progress-bg');
