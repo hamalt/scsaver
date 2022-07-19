@@ -1,0 +1,12 @@
+.scsaver {
+  position: absolute;
+  background-color: rgba(0, 0, 0, 0.75);
+}
+
+section.cover .cover-main {
+  position: static !important;
+}
+
+.github-corner {
+  z-index: 99999;
+}

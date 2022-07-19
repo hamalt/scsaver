@@ -6,9 +6,9 @@
 
 - Simple and Customizable.
 
-<!-- <div class="demo">
+<div class="demo">
   <div class="demo-control">
-    <p><label><input type="checkbox">Enabled</label></p>
+    <p><label><input type="checkbox" id="enabled-scsaver">Enabled</label></p>
     <p>
       <button @click="count -= 1">-</button>
       <span> 3 </span>
@@ -17,8 +17,11 @@
   </div>
 </div>
 
-<div id="scsaver">
-</div> -->
+<div id="scsaver" class="scsaver">
+  <div class="scsaver__inner">
+      <h1>Hello, Scsaver.</h1>
+  </div>
+</div>
 
 [GitHub](https://github.com/hamalt/scsaver/)
 [Get Started](#getting-started)

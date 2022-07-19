@@ -379,6 +379,10 @@ export default class Scsaver {
       this.waitingAnimID = null;
     }
 
+    if (this.settings.progressBar) {
+      this.disabledProgressBar();
+    }
+
     this.isWaiting = false;
   }
 
