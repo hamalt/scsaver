@@ -1,0 +1,82 @@
+.scsaver {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 9999;
+  width: 100%;
+  height: 100%;
+  display: none;
+  color: #fff;
+  background-color: #000;
+  opacity: 0;
+
+  &.black-rainbow {
+    color: #fff;
+    background: linear-gradient(
+      124deg,
+      rgba(#1c2b6d, .85),
+      rgba(#293e98, .85),
+      rgba(#293e9d, .85),
+      rgba(#233584, .85),
+      rgba(#1d2c6e, .85),
+      rgba(#162255, .85),
+      rgba(#111a43, .85),
+      rgba(#0a0f26, .85),
+      rgba(#060917, .85)
+    );
+    background-size: 1600% 1600%;
+    animation: rainbow 10s ease infinite;
+    opacity: .5;
+  }
+
+  &-inner {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+  }
+
+  &-progress {
+    &-wrapper {
+      display: none;
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      z-index: 9999;
+      width: 100%;
+      height: .25rem;
+      pointer-events: none;
+
+      &.is-child {
+        position: absolute;
+      }
+    }
+
+    &-bg {
+      display: block;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(#bfcfef, 0.25);
+    }
+
+    &-bar {
+      display: block;
+      width: 0%;
+      height: 100%;
+      background-color: rgba(#bfcfef, 0.75);
+    }
+  }
+}
+
+@keyframes rainbow {
+  0% {
+    background-position: 0% 82%;
+  }
+  50% {
+    background-position: 100% 19%;
+  }
+  100% {
+    background-position: 0% 82%;
+  }
+}
