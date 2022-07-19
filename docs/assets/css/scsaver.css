@@ -10,15 +10,21 @@
   background-color: #000;
   opacity: 0;
 }
-
-.scsaver__inner {
+.scsaver.black-rainbow {
+  color: #fff;
+  background: linear-gradient(124deg, rgba(28, 43, 109, 0.85), rgba(41, 62, 152, 0.85), rgba(41, 62, 157, 0.85), rgba(35, 53, 132, 0.85), rgba(29, 44, 110, 0.85), rgba(22, 34, 85, 0.85), rgba(17, 26, 67, 0.85), rgba(10, 15, 38, 0.85), rgba(6, 9, 23, 0.85));
+  background-size: 1600% 1600%;
+  -webkit-animation: rainbow 10s ease infinite;
+          animation: rainbow 10s ease infinite;
+  opacity: 0.5;
+}
+.scsaver-inner {
   display: flex;
   justify-content: center;
   align-items: center;
   width: 100%;
   height: 100%;
 }
-
 .scsaver-progress-wrapper {
   display: none;
   position: fixed;
@@ -26,20 +32,45 @@
   left: 0;
   z-index: 9999;
   width: 100%;
-  height: .25rem;
+  height: 0.25rem;
   pointer-events: none;
 }
-
+.scsaver-progress-wrapper.is-child {
+  position: absolute;
+}
 .scsaver-progress-bg {
   display: block;
   width: 100%;
   height: 100%;
-  background-color: #ccc;
+  background-color: rgba(191, 207, 239, 0.25);
 }
-
 .scsaver-progress-bar {
   display: block;
   width: 0%;
   height: 100%;
-  background-color: rgb(0, 145, 208);
+  background-color: rgba(191, 207, 239, 0.75);
+}
+
+@-webkit-keyframes rainbow {
+  0% {
+    background-position: 0% 82%;
+  }
+  50% {
+    background-position: 100% 19%;
+  }
+  100% {
+    background-position: 0% 82%;
+  }
+}
+
+@keyframes rainbow {
+  0% {
+    background-position: 0% 82%;
+  }
+  50% {
+    background-position: 100% 19%;
+  }
+  100% {
+    background-position: 0% 82%;
+  }
 }

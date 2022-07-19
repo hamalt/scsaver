@@ -14,19 +14,14 @@
     <p>This is screensaver library with JavaScript.</p>
 
     <div id="scsaver" class="scsaver black-rainbow">
-        <div class="scsaver__inner">
+        <div class="scsaver-inner">
             <p>Hello, Scsaver.</p>
         </div>
     </div>
-<!-- 
+
     <div id="monitor">
         <p><span id=""></span></p>
-    </div> -->
-
-    <!-- <script type="module" src="./src/index.js"></script>
-    <script>
-      console.log(Scsaver);
-    </script> -->
+    </div>
 
     <script src="../dist/scsaver.js"></script>
     <script>
@@ -37,6 +32,7 @@
             'click'
           ],
           progressBar: true,
+          progressBarParent: '#monitor',
           on: {
               waitStart: function() {
                   console.log('waitStart Param');

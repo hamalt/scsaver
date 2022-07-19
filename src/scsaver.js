@@ -229,7 +229,18 @@ export default class Scsaver {
     progressBg.appendChild(this.progressBar.barElement);
     this.progressBar.wrapperElement.appendChild(progressBg);
 
-    document.body.appendChild(this.progressBar.wrapperElement);
+    if (this.settings.progressBarParent) {
+      const progressBarParentElm = document.querySelector(this.settings.progressBarParent);
+
+      if (null === progressBarParentElm) {
+        throw Error('Scsaver progress bar parent element not found.');
+      }
+
+      this.progressBar.wrapperElement.classList.add('is-child');
+      progressBarParentElm.appendChild(this.progressBar.wrapperElement);
+    } else {
+      document.body.appendChild(this.progressBar.wrapperElement);
+    }
   }
 
   start() {

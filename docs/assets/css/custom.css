@@ -108,10 +108,6 @@ body[data-page="README.md"] .custom-cover {
   display: flex;
 }
 
-.cover {
-  /* display: none !important; */
-}
-
 .demo {
   display: flex;
   flex-direction: column;
@@ -194,7 +190,7 @@ body[data-page="README.md"] .custom-cover {
   height: 1rem;
   left: 0;
   transform: translate(0, -50%);
-  transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+  transition: all 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
 }
 .demo-control-enabled-text::after {
   opacity: 0;
@@ -207,7 +203,7 @@ body[data-page="README.md"] .custom-cover {
   background-color: transparent;
   border-right: 0.125rem solid #fff;
   border-bottom: 0.125rem solid #fff;
-  transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+  transition: all 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
 }
 button[data-scsaver-enabled=true] .demo-control-enabled-text::before {
   opacity: 0;
@@ -236,29 +232,12 @@ input:checked + label .demo-control-enabled-text::after {
   opacity: 0.5;
 }
 
-.scsaver-progress-bg {
-  background-color: rgba(191, 207, 239, 0.25);
-}
-
-.scsaver-progress-bar {
-  background-color: rgba(191, 207, 239, 0.75);
-}
-
 .rainbow {
   color: #fff;
   background: linear-gradient(124deg, #ff2400, #e81d1d, #e8b71d, #e3e81d, #1de840, #1ddde8, #2b1de8, #dd00f3, #dd00f3);
   background-size: 1800% 1800%;
   -webkit-animation: rainbow 32s ease infinite;
           animation: rainbow 32s ease infinite;
-}
-
-.black-rainbow {
-  color: #fff;
-  background: linear-gradient(124deg, rgba(28, 43, 109, 0.85), rgba(41, 62, 152, 0.85), rgba(41, 62, 157, 0.85), rgba(35, 53, 132, 0.85), rgba(29, 44, 110, 0.85), rgba(22, 34, 85, 0.85), rgba(17, 26, 67, 0.85), rgba(10, 15, 38, 0.85), rgba(6, 9, 23, 0.85));
-  background-size: 1800% 1800%;
-  -webkit-animation: rainbow 10s ease infinite;
-          animation: rainbow 10s ease infinite;
-  opacity: 0.5;
 }
 
 @-webkit-keyframes rainbow {
