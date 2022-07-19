@@ -13,10 +13,10 @@ export default class Scsaver {
   defaults = {
     waitTime: 3200,
     events: ['keydown', 'mousemove', 'touchstart', 'click'],
+    doInterval: 200,
     showFadeTime: 1000,
     hideFadeTime: 1000,
     autoStart: true,
-    doInterval: 200,
     progressBar: false,
     progressBarParent: null,
     debug: false,
@@ -252,6 +252,7 @@ export default class Scsaver {
   registerDoing() {
     const self = this;
 
+    // TODO: if non array
     this.settings.events.forEach(function (event) {
       window.addEventListener(event, self.intervalDoing.bind(self));
     });
@@ -260,6 +261,7 @@ export default class Scsaver {
   unregisterDoing() {
     const self = this;
 
+    // TODO: if non array
     this.settings.events.forEach(function (event) {
       window.removeEventListener(event, self.intervalDoing);
     });
