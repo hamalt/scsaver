@@ -64,13 +64,11 @@ export default [
         browser: true,
       }),
       eslint({}),
-      serve({
+      !production && serve({
         open: true,
         openPage: '/demo/demo.html',
       }),
-      livereload({
-        watch: 'dist',
-      }),
+      !production && livereload('./dist'),
     ],
   },
 

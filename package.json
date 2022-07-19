@@ -6,7 +6,8 @@
   "module": "dist/scsaver.es.js",
   "browser": "dist/scsaver.js",
   "scripts": {
-    "dev": "rollup -c -w",
+    "dev": "rollup -c -w --environment ROLLUP_WATCH",
+    "build": "rollup -c",
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "eslint --cache --fix src/",
     "lint-fix": "eslint --cache --fix src/ && prettier --write src/",
