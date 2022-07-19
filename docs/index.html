@@ -11,23 +11,165 @@
   <link rel="stylesheet" href="./assets/css/custom.css">
 </head>
 <body>
-  <div id="app">Please wait...</div>
+  <section class="custom-cover">
+    <div class="custom-cover-inner">
+      <h1>Scsaver.js <small>0.1.3</small></h1>
+
+      <blockquote>Web page screensaver JavaScript library.</blockquote>
+
+      <div class="demo">
+        <h2 class="demo-headline">DEMO</h2>
+        <div class="demo-control">
+          <div class="demo-control-field demo-control-enabled">
+            <button id="scsaver-toggle" class="rainbow" data-scsaver-enabled="false"><span class="demo-control-enabled-text">Scsaver.js <i id="demo-control-enabled-state">Enabled</i></span></button>
+          </div>
+          <div class="demo-control-field">
+            <div class="demo-control-params">
+              <p><span class="demo-control-params-label">Wait time (ms): </span><span id="scsaver-wait-time"></span></p>
+              <p><span class="demo-control-params-label">Fade time (ms): </span>Show <span id="scsaver-show-time">true</span> / Hide <span id="scsaver-hide-time">true</span></p>
+              <p><span class="demo-control-params-label">Progress bar: </span><span id="scsaver-progress-bar">true</span></p>
+              <p><span class="demo-control-params-label">Release events: </span><span id="scsaver-release-events"></span></p>
+              <p><span class="demo-control-params-label">Release event interval: </span><span id="scsaver-event-interval"></span></p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div id="scsaver" class="scsaver black-rainbow">
+        <div class="scsaver__inner">
+            <h1>Hello, Scsaver.</h1>
+        </div>
+      </div>
+
+      <div class="action-link">
+        <a href="https://github.com/hamalt/scsaver/" target="_blank" rel="noopener">GitHub</a>
+        <a href="#/?id=getting-started">Get Started</a>
+      </div>
+    </div>
+  </section>
 
   <script src="./assets/js/scsaver.min.js"></script>
+
+  <div id="app">Please wait...</div>
+
   <script>
     window.$docsify = {
-      name: '',
       repo: 'hamalt/scsaver',
       // coverpage: true,
-      coverpage: '_coverpage.html',
+      coverpage: true,
       onlyCover: false,
-      name: '<span>Scsaver.js</span>',
-      themeColor: '#3F51B5',
+      name: '<span>Scsaver.js - Home</span>',
+      themeColor: '#060917',
       executeScript: true,
+      loadSidebar: true,
+      // loadNavbar: true,
+      // mergeNavbar: true,
+      maxLevel: 1,
+      subMaxLevel: 2,
     }
   </script>
   <!-- Docsify v4 -->
   <script src="//cdn.jsdelivr.net/npm/docsify@4"></script>
   <script src="//cdn.jsdelivr.net/npm/docsify/lib/plugins/external-script.min.js"></script>
+
+  <script>
+    const option = {
+      waitTime : 2000,
+      showFadeTime: 300,
+      hideFadeTime: 300,
+      autoStart: false,
+      progressBar: true,
+      events: [
+        'mousemove',
+        'click',
+        'scroll',
+      ],
+      on: {
+        init: function(e) {
+          document.getElementById('scsaver-wait-time').innerText = this.settings.waitTime;
+          document.getElementById('scsaver-progress-bar').innerText = this.settings.progressBar;
+          document.getElementById('scsaver-show-time').innerText = this.settings.showFadeTime;
+          document.getElementById('scsaver-hide-time').innerText = this.settings.hideFadeTime;
+
+          this.settings.events.forEach(function(event) {
+            let text = event;
+            if ('' !== document.getElementById('scsaver-release-events').innerText) {
+              text = ', ' + text;
+            }
+
+            document.getElementById('scsaver-release-events').innerText += text;
+          });
+
+          document.getElementById('scsaver-event-interval').innerText = this.settings.doInterval;
+        },
+        // showStart: function(e) {
+        //   console.log("showStart");
+        // },
+        // hideStart: function(e) {
+        //   console.log("hideStart");
+        // },
+      }
+    }
+    const scsaver = new Scsaver('#scsaver', option);
+
+    // const scsaverStateTextElm = document.getElementById('demo-control-enabled-state');
+    const scsaverToggleElm = document.getElementById('scsaver-toggle');
+    scsaverToggleElm.addEventListener('click', function(e) {
+      e.stopPropagation();
+      if (e.target.dataset.scsaverEnabled === 'true') {
+        scsaver.disabled();
+        e.target.dataset.scsaverEnabled = 'false';
+        // scsaverStateTextElm.innerText = 'Enabled';
+      } else {
+        scsaver.enabled();
+        e.target.dataset.scsaverEnabled = 'true';
+        // scsaverStateTextElm.innerText = 'Disabled';
+      }
+    });
+
+    // Plugin
+    function doSomething(hook, vm) {
+      hook.doneEach(function(e) {
+        // console.log("DONE?");
+        // console.log(vm.route.path);
+
+        if ('/' !== vm.route.path) {
+          scsaver.disabled();
+          scsaverToggleElm.dataset.scsaverEnabled = 'false';
+        }
+      });
+
+      // hook.beforeEach(function(e) {
+      //   // Do something...
+      //   console.log("BEFORE?");
+      //   console.log(e);
+      // });
+
+      // hook.afterEach(function(e) {
+      //   // Do something...
+      //   console.log("AFTER?");
+      //   console.log(e);
+      //   console.log(vm.route.path);
+      // });
+
+      // hook.init(function(e) {
+      //   // Do something...
+      //   console.log("init?");
+      // });
+
+      // hook.mounted(function(e) {
+      //   // Do something...
+      //   console.log("mounted?");
+      // });
+
+      // hook.ready(function(e) {
+      //   // Do something...
+      //   console.log("ready?");
+      // });
+    }
+
+    // Add to plugin array
+    $docsify.plugins = [].concat(doSomething, $docsify.plugins);
+  </script>
 </body>
 </html>
