@@ -19,6 +19,7 @@ export default class Scsaver {
     autoStart: true,
     progressBar: false,
     progressBarParent: null,
+    on: null,
     debug: false,
   };
 
