@@ -324,6 +324,8 @@ export default class Scsaver {
       this.cancelFadeIn();
       this.fadeOut();
     }
+
+    // TODO: if fadeIn or FadeOut
   }
 
   enabledState() {
