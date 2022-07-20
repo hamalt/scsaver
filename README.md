@@ -1,5 +1,7 @@
 # Scsaver.js
 
+[DEMO & Document](https://hamalt.github.io/scsaver/)
+
 [![Latest Release](https://img.shields.io/github/tag/hamalt/scsaver.svg?label=release)](https://github.com/hamalt/scsaver/releases/latest) [![Stars](https://img.shields.io/github/stars/hamalt/scsaver.svg)](https://github.com/hamalt/scsaver/stargazers) [![License](https://img.shields.io/github/license/hamalt/scsaver.svg)](LICENSE)
 
 Web page screensaver JavaScript library.
