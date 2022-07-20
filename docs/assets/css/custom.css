@@ -150,6 +150,13 @@ body[data-page="README.md"] .custom-cover {
   font-family: Source Sans Pro, Helvetica Neue, Arial, sans-serif;
   border: none;
   width: 100%;
+  transition: all 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
+  border: solid 0.125rem transparent;
+}
+.demo-control-enabled label:hover,
+.demo-control-enabled button:hover {
+  box-shadow: none;
+  border-color: #fff;
 }
 .demo-control-enabled button * {
   pointer-events: none;
