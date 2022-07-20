@@ -7,12 +7,35 @@
 Web page screensaver JavaScript library.
 Beta version.
 
+## What it is
+
+It is a JavaScript library to realize the function of the screen saver on the web page.  
+This program was used in an interactive video for booth installation.  
+(I created it because I had to display a different video or image than the interactive video if there was no action.)
+
 ## Getting Started
+
+### Step0: Build the file
+
+Build with the following command:
+
+```
+npm install
+or
+yarn install
+```
+
+```
+npm run build
+```
+
+`scsaver.min.js` is output to the `dist` folder.  
+The CSS file is in the `src` directory.
 
 ### Step1: Load the required files
 
 ```html
-<link rel="stylesheet" href="src/style.css">
+<link rel="stylesheet" href="src/scsaver.css">
 <script src="dist/scsaver.min.js"></script>
 ```
 

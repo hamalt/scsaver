@@ -20,7 +20,7 @@ export default class Scsaver {
     progressBar: false,
     progressBarParent: null,
     on: null,
-    debug: false,
+    debug: false
   };
 
   /**
@@ -64,8 +64,8 @@ export default class Scsaver {
   progressBar = {
     wrapperElement: null,
     barElement: null,
-    progress: 0,
-  }
+    progress: 0
+  };
 
   /**
    * Fade in data.
@@ -74,7 +74,7 @@ export default class Scsaver {
   fadeInData = {
     animReqID: null,
     cancelToken: null
-  }
+  };
 
   /**
    * Fade out data.
@@ -83,7 +83,7 @@ export default class Scsaver {
   fadeOutData = {
     animReqID: null,
     cancelToken: null
-  }
+  };
 
   constructor(...args) {
     // Merge options
@@ -120,9 +120,7 @@ export default class Scsaver {
       this.initProgressBar();
     }
 
-    this.element.dispatchEvent(
-      new CustomEvent('init')
-    );
+    this.element.dispatchEvent(new CustomEvent('init'));
 
     if (this.settings.autoStart) {
       this.start();
@@ -210,6 +208,7 @@ export default class Scsaver {
         this.enabledState();
         break;
       case this.states.Default:
+        break;
       default:
         break;
     }
@@ -282,11 +281,16 @@ export default class Scsaver {
         this.wait();
         break;
       case this.states.Show:
+        this.cancelFadeIn();
+        this.hide();
+        break;
       case this.states.ShowFadeInComplete:
         this.cancelFadeIn();
         this.hide();
         break;
       case this.states.Hide:
+        if (this.isHidden) this.wait();
+        break;
       case this.states.HideFadeOutComplete:
         if (this.isHidden) this.wait();
         break;
@@ -438,7 +442,6 @@ export default class Scsaver {
         if (progress < finalValue) {
           self.waitingAnimID = requestAnimationFrame(waitingProgress);
         } else {
-
           if (self.settings.progressBar) {
             self.progressBar.barElement.classList.add('is-filled');
             self.progressBar.wrapperElement.style.display = 'none';
