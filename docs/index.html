@@ -4,7 +4,8 @@
   <meta charset="UTF-8">
   <title>Scsaver.js</title>
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-  <meta name="description" content="Description">
+  <meta name="description" content>
+  <meta name="keywords" content>
   <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
   <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/docsify@4/lib/themes/vue.css">
   <link rel="stylesheet" href="./assets/css/scsaver.css">
@@ -66,11 +67,55 @@
       // mergeNavbar: true,
       maxLevel: 1,
       subMaxLevel: 3,
+      seo: {
+        title: (route, frontmatter) => {
+          console.log(route);
+          // console.log(frontmatter);
+
+          // route.fileの拡張子を削除
+          const fileName = route.file;
+
+          // undefinedなら処理をしない
+          if (typeof fileName === 'undefined') return;
+          // console.log(fileName);
+
+          // fileNameの最後の文字３つを削除
+          // fileName = route.file.substring(0, fileName.length - 3);
+          // console.log(fileName);
+          // fileName = fileName.replace(/\.[^/.]+$/, "");
+          // console.log(fileName);
+          let title = "";
+
+          switch (route.path) {
+          case '/':
+            title = "Scsaver.js | Web page screensaver JavaScript library.";
+            break;
+          }
+
+          return title;
+        },
+        description: (route, frontmatter) => {
+          console.log(route.path);
+          let description = "";
+
+          switch (route.path) {
+          case '/':
+            description = "Scsaver.js is a JavaScript library for web page screensaver.";
+            break;
+          }
+          // if (route.path.startWith('/ja/')) return `一般的な説明`
+          // else return `Some default description`
+
+          return description;
+        },
+        keywords: `javascript, screensaver`,
+      },
     }
   </script>
   <!-- Docsify v4 -->
   <script src="//cdn.jsdelivr.net/npm/docsify@4"></script>
   <script src="//cdn.jsdelivr.net/npm/docsify-pagination/dist/docsify-pagination.min.js"></script>
+  <script src="./assets/js/dcsify.plugin.seo.js"></script>
 
   <script>
     const option = {
