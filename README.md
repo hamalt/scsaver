@@ -32,6 +32,13 @@ npm run build
 `scsaver.min.js` is output to the `dist` folder.  
 The CSS file is in the `src` directory.
 
+Alternatively, you can use a CDN.
+
+```
+https://cdn.jsdelivr.net/npm/scsaver@latest/dist/scsaver.min.js
+https://cdn.jsdelivr.net/npm/scsaver@latest/src/scsaver.css
+```
+
 ### Step1: Load the required files
 
 ```html
