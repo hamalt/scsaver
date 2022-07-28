@@ -48,7 +48,7 @@ function HomepageCover() {
                   <p><span className="demo-control-params-label">Wait time (ms): </span><span id="scsaver-wait-time">2000</span></p>
                   <p><span className="demo-control-params-label">Fade time (ms): </span>Show <span id="scsaver-show-time">300</span> / Hide <span id="scsaver-hide-time">300</span></p>
                   <p><span className="demo-control-params-label">Progress bar: </span><span id="scsaver-progress-bar">true</span></p>
-                  <p><span className="demo-control-params-label">Release events: </span><span id="scsaver-release-events">mousemove, click, scroll</span></p>
+                  <p><span className="demo-control-params-label">Release events: </span><span id="scsaver-release-events"></span></p>
                   <p><span className="demo-control-params-label">Release event interval: </span><span id="scsaver-event-interval">200</span></p>
                 </div>
               </div>
