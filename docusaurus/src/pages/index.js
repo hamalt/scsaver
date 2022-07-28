@@ -160,14 +160,6 @@ export default function Home() {
       <main>
         <HomepageFeatures />
       </main>
-
-      <script
-        dangerouslySetInnerHTML={{
-          __html: `
-            console.log("component!!");
-          `
-        }}
-      />
     </Layout>
   );
 }

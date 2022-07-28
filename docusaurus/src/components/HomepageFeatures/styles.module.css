@@ -3,6 +3,9 @@
   align-items: center;
   padding: 2rem 0;
   width: 100%;
+  background-color: #232393;
+  /* background-color: #1f1f4e; */
+  color: var(--ifm-color-primary-light);
 }
 
 .featureSvg {

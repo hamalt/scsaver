@@ -21,7 +21,7 @@
   --ifm-navbar-background-color: transparent;
 
   // Footer
-  --ifm-footer-background-color: #060917;
+  --ifm-footer-background-color: #000419;
 }
 
 /* For readability concerns, you should choose a lighter palette in dark mode. */
@@ -35,7 +35,7 @@
   --ifm-color-primary-lightest: #f5f6fd;
 
   // html tag
-  --ifm-background-color: #060917 !important;
+  --ifm-background-color: #000419 !important;
 }
 
 //Docusaurus custom
@@ -46,15 +46,15 @@ html:not(.docs-doc-page) {
   }
 }
 
-.features_src-components-HomepageFeatures-styles-module {
-  // svg {
-  //   color: var(--ifm-color-primary-light);
-  //   fill: currentColor;
-  //   stroke: currentColor;
-  // }
-  background-color: #1f1f4e;
-  color: var(--ifm-color-primary-light);
-}
+// .features_src-components-HomepageFeatures-styles-module {
+//   // svg {
+//   //   color: var(--ifm-color-primary-light);
+//   //   fill: currentColor;
+//   //   stroke: currentColor;
+//   // }
+//   background-color: #1f1f4e;
+//   color: var(--ifm-color-primary-light);
+// }
 
 // top page custom
 .cover {
@@ -68,7 +68,7 @@ html:not(.docs-doc-page) {
   background-size: cover;
   height: 100vh;
   width: 100%;
-  background-color: #060917;
+  background-color: #000419;
   color: var(--ifm-color-primary-light);
 
   &-inner {
@@ -118,7 +118,7 @@ html:not(.docs-doc-page) {
 
       &:last-child {
         background-color: var(--ifm-color-primary-light);
-        color: #060917;
+        color: #000419;
       }
     }
   }
@@ -184,7 +184,7 @@ html:not(.docs-doc-page) {
     text-align: center;
     margin-top: calc(-1.5rem);
     transform: translateY(-50%);
-    background: #060917;
+    background: #000419;
     text-align: center;
     width: auto;
     padding: 0 1.5rem;
@@ -234,7 +234,7 @@ html:not(.docs-doc-page) {
       }
 
       // &-inner {
-      //   color: #060917;
+      //   color: #000419;
       //   background-color: #fff;
       //   padding: .75rem 2rem;
       //   border-radius: 2rem;
