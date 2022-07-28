@@ -41,7 +41,6 @@
     "@rollup/plugin-commonjs": "^22.0.1",
     "@rollup/plugin-eslint": "^8.0.2",
     "@rollup/plugin-node-resolve": "^13.3.0",
-    "documentation": "^13.2.5",
     "esbuild": "^0.14.49",
     "eslint": "^8.20.0",
     "eslint-config-prettier": "^8.5.0",
