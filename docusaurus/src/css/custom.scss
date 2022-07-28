@@ -1,0 +1,349 @@
+/**
+ * Any CSS included here will be global. The classic template
+ * bundles Infima by default. Infima is a CSS framework designed to
+ * work well for content-centric websites.
+ * @see https://docusaurus.io/docs/styling-layout
+ */
+
+/* You can override the default Infima variables here. */
+:root {
+  --ifm-color-primary: #2e8555;
+  --ifm-color-primary-dark: #29784c;
+  --ifm-color-primary-darker: #277148;
+  --ifm-color-primary-darkest: #205d3b;
+  --ifm-color-primary-light: #33925d;
+  --ifm-color-primary-lighter: #359962;
+  --ifm-color-primary-lightest: #3cad6e;
+  --ifm-code-font-size: 95%;
+  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
+
+  /* navbar */
+  --ifm-navbar-background-color: transparent;
+
+  // Footer
+  --ifm-footer-background-color: #060917;
+}
+
+/* For readability concerns, you should choose a lighter palette in dark mode. */
+[data-theme='dark'] {
+  --ifm-color-primary: #91a3ee;
+  --ifm-color-primary-dark: #7087e9;
+  --ifm-color-primary-darker: #5f79e6;
+  --ifm-color-primary-darkest: #2d50df;
+  --ifm-color-primary-light: #b2bff3;
+  --ifm-color-primary-lighter: #c3cdf6;
+  --ifm-color-primary-lightest: #f5f6fd;
+
+  // html tag
+  --ifm-background-color: #060917 !important;
+}
+
+//Docusaurus custom
+html:not(.docs-doc-page) {
+  .navbar--fixed-top {
+    position: fixed;
+    width: 100%;
+  }
+}
+
+.features_src-components-HomepageFeatures-styles-module {
+  // svg {
+  //   color: var(--ifm-color-primary-light);
+  //   fill: currentColor;
+  //   stroke: currentColor;
+  // }
+  background-color: #1f1f4e;
+  color: var(--ifm-color-primary-light);
+}
+
+// top page custom
+.cover {
+  /* top: 0;
+  left: 0;
+  z-index: 999; */
+  position: relative;
+  align-items: center;
+  background-position: 50%;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 100vh;
+  width: 100%;
+  background-color: #060917;
+  color: var(--ifm-color-primary-light);
+
+  &-inner {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+  }
+
+  a {
+      color: inherit;
+      text-decoration: none;
+
+      &:hover {
+        text-decoration: none
+      }
+  }
+
+  p {
+    line-height: 1.5rem;
+    margin: 1em 0;
+  }
+
+  .action-link {
+    margin: 1.5rem 0 0;
+
+    a {
+      border-radius: 2rem;
+      border: 1px solid var(--ifm-color-primary-light);
+      box-sizing: border-box;
+      color: var(--ifm-color-primary-light);
+      display: inline-block;
+      font-size: 1.05rem;
+      letter-spacing: .1rem;
+      margin: .5rem 1rem 0;
+      padding: .75em 2rem;
+      text-decoration: none;
+      transition: all .15s ease;
+      opacity: 1;
+
+      &:hover {
+        color: inherit;
+        opacity: .75;
+      }
+
+      &:last-child {
+        background-color: var(--ifm-color-primary-light);
+        color: #060917;
+      }
+    }
+  }
+
+  h1 {
+    color: inherit;
+    font-size: 2.5rem;
+    font-weight: 300;
+    margin: .625rem 0 0;
+    position: relative;
+    text-align: center
+
+    a {
+      display: block;
+    }
+
+    small {
+      bottom: -.4375rem;
+      font-size: 1rem;
+      position: absolute;
+    }
+  }
+
+  &-tagline {
+    margin: 1.5rem 0 2.5rem;
+    font-size: 1.5rem;
+    text-align: center;
+    font-weight: normal;
+
+    & > p > a {
+      border-bottom: 2px solid var(--theme-color,#42b983);
+      transition: color .3s;
+
+      &:hover {
+      color: var(--theme-color,#42b983);
+      }
+    }
+  }
+
+  ul {
+    line-height: 1.8;
+    list-style-type: none;
+    margin: 1em auto;
+    max-width: 500px;
+    padding: 0
+  }
+}
+
+.demo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  border-radius: 0.5rem;
+  border: 0.0625rem solid #585858;
+  max-width: 100%;
+  // width: 20rem;
+  margin-top: 1.5rem;
+
+  &-headline {
+    margin: 0;
+    text-align: center;
+    margin-top: calc(-1.5rem);
+    transform: translateY(-50%);
+    background: #060917;
+    text-align: center;
+    width: auto;
+    padding: 0 1.5rem;
+    font-weight: normal;
+  }
+
+  &-control {
+    &-field {
+      text-align: center;
+
+      &:not(:last-child) {
+        margin-bottom: 0.5rem;
+      }
+
+      input {
+        &[type="checkbox"] {
+          display: none;
+        }
+      }
+    }
+    &-enabled {
+      label,
+      button {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: .75rem 2rem;
+        border-radius: 2rem;
+        cursor: pointer;
+        font-family: Source Sans Pro,Helvetica Neue,Arial,sans-serif;
+        border: none;
+        width: 100%;
+        // box-shadow: 0 0 0.5rem rgba(255, 255, 255, 0.5);
+        transition: all .2s cubic-bezier(.645,.045,.355,1);
+        border: solid .125rem transparent;
+
+        &:hover {
+          box-shadow: none;
+          border-color: #fff;
+        }
+      }
+
+      button {
+        * {
+          pointer-events: none;
+        }
+      }
+
+      // &-inner {
+      //   color: #060917;
+      //   background-color: #fff;
+      //   padding: .75rem 2rem;
+      //   border-radius: 2rem;
+      // }
+
+      &-text {
+        position: relative;
+        display: block;
+        padding: 0 0 0 1.5rem;
+        color: #fff;
+        mix-blend-mode: exclusion;
+        font-size: 1.25rem;
+
+        i {
+          font-style: normal;
+          webkit-tap-highlight-color: transparent;
+
+          &::selection {
+            background-color: transparent;
+          }
+        }
+
+        &::selection {
+          background-color: transparent;
+        }
+
+        &::before,
+        &::after {
+          display: block;
+          content: '';
+          position: absolute;
+          top: 50%;
+        }
+
+        &::before {
+          border: .125rem solid #fff;
+          // background-color: #f7f7f7;
+          width: 1rem;
+          height: 1rem;
+          left: 0;
+          transform: translate(0,-50%);
+          transition: all .2s cubic-bezier(.645,.045,.355,1);
+        }
+
+        &::after {
+          opacity: 0;
+          width: 0.68rem;
+          height: 1em;
+          transform: translate(0,-50%) rotate(0);
+          left: .125rem;
+          margin-top: -0.2rem;
+          border: none;
+          background-color: transparent;
+          border-right: .125rem solid #fff;
+          border-bottom: .125rem solid #fff;
+          transition: all .2s cubic-bezier(.645,.045,.355,1);
+        }
+      }
+
+      button[data-scsaver-enabled="true"] &-text {
+        &::before {
+          opacity: 0;
+        }
+
+        &::after {
+          transform: translate(0,-50%) rotate(45deg);
+          opacity: 1;
+        }
+      }
+
+      input:checked + label &-text {
+        &::before {
+          opacity: 0;
+        }
+
+        &::after {
+          transform: translate(0,-50%) rotate(45deg);
+          opacity: 1;
+        }
+      }
+    }
+
+    &-params {
+      opacity: .75;
+
+      p {
+        margin: 0;
+
+        &:not(:last-child) {
+          margin-bottom: .375rem;
+        }
+      }
+
+      &-label {
+        opacity: .5;
+      }
+    }
+  }
+}
+
+.rainbow {
+  color: #fff;
+  background: linear-gradient(124deg, #ff2400, #e81d1d, #e8b71d, #e3e81d, #1de840, #1ddde8, #2b1de8, #dd00f3, #dd00f3);
+  background-size: 1800% 1800%;
+  animation: rainbow 32s ease infinite;
+}
+
+@keyframes rainbow {
+    0%{background-position:0% 82%}
+    50%{background-position:100% 19%}
+    100%{background-position:0% 82%}
+}
