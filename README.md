@@ -1,3 +1,5 @@
+![Scsaver.js](https://github.com/hamalt/scsaver/blob/main/assets/img/scsaver_github_ogp.png?raw=true)
+
 # Scsaver.js
 
 [DEMO & Document](https://hamalt.github.io/scsaver/)
