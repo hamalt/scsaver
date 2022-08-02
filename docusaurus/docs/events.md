@@ -2,7 +2,7 @@
 sidebar_label: Events
 sidebar_position: 5
 title: Events | Scsaver.js Documents
-# description: 
+description: About events in Scsaver.js.
 # image: 
 keywords: [Scsaver.js, Events]
 ---

@@ -4,7 +4,6 @@
  * work well for content-centric websites.
  * @see https://docusaurus.io/docs/styling-layout
  */
-
 /* You can override the default Infima variables here. */
 :root {
   --ifm-color-primary: #2e8555;
@@ -16,38 +15,296 @@
   --ifm-color-primary-lightest: #3cad6e;
   --ifm-code-font-size: 95%;
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
-
   /* navbar */
   --ifm-navbar-background-color: transparent;
+  --ifm-footer-background-color: #000419;
 }
 
 /* For readability concerns, you should choose a lighter palette in dark mode. */
-[data-theme='dark'] {
-  --ifm-color-primary: #25c2a0;
-  --ifm-color-primary-dark: #21af90;
-  --ifm-color-primary-darker: #1fa588;
-  --ifm-color-primary-darkest: #1a8870;
-  --ifm-color-primary-light: #29d5b0;
-  --ifm-color-primary-lighter: #32d8b4;
-  --ifm-color-primary-lightest: #4fddbf;
-  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
+html[data-theme=dark] {
+  --ifm-color-primary: #989de2;
+  --ifm-color-primary-dark: #7b81da;
+  --ifm-color-primary-darker: #6c73d6;
+  --ifm-color-primary-darkest: #666dd4;
+  --ifm-color-primary-light: #b5b9ea;
+  --ifm-color-primary-lighter: #c4c7ee;
+  --ifm-color-primary-lightest: #f0f1fb;
+  --ifm-background-color: #000419;
+}
+
+html:not(.docs-doc-page) .navbar--fixed-top {
+  position: fixed;
+  width: 100%;
 }
 
 .cover {
   /* top: 0;
   left: 0;
   z-index: 999; */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
   align-items: center;
   background-position: 50%;
   background-repeat: no-repeat;
   background-size: cover;
-  height: 100vh;
-  width: 100vw;
-  background-color: #060917;
-  color: #bfcfef;
+  min-height: 100vh;
+  width: 100%;
+  background-color: #000419;
+  color: var(--ifm-color-primary-light);
+  padding: 5rem 0;
 }
-
-.navbar--fixed-top {
-  position: fixed;
+.cover-inner {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
   width: 100%;
 }
+.cover .scsaver {
+  position: absolute;
+}
+.cover a {
+  color: inherit;
+  text-decoration: none;
+}
+.cover a:hover {
+  text-decoration: none;
+}
+.cover p {
+  line-height: 1.5rem;
+  margin: 1em 0;
+}
+.cover .action-link {
+  margin: 1.5rem 0 0;
+}
+.cover .action-link a {
+  border-radius: 2rem;
+  border: 1px solid var(--ifm-color-primary-light);
+  box-sizing: border-box;
+  color: var(--ifm-color-primary-light);
+  display: inline-block;
+  font-size: 1.05rem;
+  letter-spacing: 0.1rem;
+  margin: 0.5rem 1rem 0;
+  padding: 0.75em 2rem;
+  text-decoration: none;
+  transition: all 0.15s ease;
+  opacity: 1;
+}
+.cover .action-link a:hover {
+  color: inherit;
+  opacity: 0.75;
+}
+.cover .action-link a:last-child {
+  background-color: var(--ifm-color-primary-light);
+  color: #000419;
+}
+.cover h1 {
+  color: inherit;
+  font-size: 2.5rem;
+  font-weight: 300;
+  margin: 0.625rem 0 0;
+  position: relative;
+  text-align: center;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 900;
+}
+.cover h1 a {
+  display: block;
+}
+.cover h1 small {
+  bottom: -0.4375rem;
+  font-size: 1rem;
+  position: absolute;
+}
+.cover-logo {
+  width: 8rem;
+  height: 8rem;
+}
+.cover-tagline {
+  margin: 1.5rem 0 2.5rem;
+  font-size: 1.5rem;
+  text-align: center;
+  font-weight: normal;
+}
+.cover-tagline > p > a {
+  border-bottom: 2px solid var(--theme-color, #42b983);
+  transition: color 0.3s;
+}
+.cover-tagline > p > a:hover {
+  color: var(--theme-color, #42b983);
+}
+.cover ul {
+  line-height: 1.8;
+  list-style-type: none;
+  margin: 1em auto;
+  max-width: 500px;
+  padding: 0;
+}
+
+.demo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  border-radius: 0.5rem;
+  border: 0.0625rem solid #585858;
+  max-width: 100%;
+  margin-top: 1.5rem;
+}
+.demo-headline {
+  margin: 0;
+  text-align: center;
+  margin-top: -1.5rem;
+  transform: translateY(-50%);
+  background: #000419;
+  text-align: center;
+  width: auto;
+  padding: 0 1.5rem;
+  font-weight: normal;
+}
+.demo-control-field {
+  text-align: center;
+}
+.demo-control-field:not(:last-child) {
+  margin-bottom: 0.5rem;
+}
+.demo-control-field input[type=checkbox] {
+  display: none;
+}
+.demo-control-enabled label,
+.demo-control-enabled button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.75rem 2rem;
+  border-radius: 2rem;
+  cursor: pointer;
+  font-family: Source Sans Pro, Helvetica Neue, Arial, sans-serif;
+  border: none;
+  width: 100%;
+  transition: all 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
+  border: solid 0.125rem transparent;
+}
+.demo-control-enabled label:hover,
+.demo-control-enabled button:hover {
+  box-shadow: none;
+  border-color: #fff;
+}
+.demo-control-enabled button * {
+  pointer-events: none;
+}
+.demo-control-enabled-text {
+  position: relative;
+  display: block;
+  padding: 0 0 0 1.5rem;
+  color: #fff;
+  mix-blend-mode: exclusion;
+  font-size: 1.25rem;
+}
+.demo-control-enabled-text i {
+  font-style: normal;
+  webkit-tap-highlight-color: transparent;
+}
+.demo-control-enabled-text i::-moz-selection {
+  background-color: transparent;
+}
+.demo-control-enabled-text i::selection {
+  background-color: transparent;
+}
+.demo-control-enabled-text::-moz-selection {
+  background-color: transparent;
+}
+.demo-control-enabled-text::selection {
+  background-color: transparent;
+}
+.demo-control-enabled-text::before, .demo-control-enabled-text::after {
+  display: block;
+  content: "";
+  position: absolute;
+  top: 50%;
+}
+.demo-control-enabled-text::before {
+  border: 0.125rem solid #fff;
+  width: 1rem;
+  height: 1rem;
+  left: 0;
+  transform: translate(0, -50%);
+  transition: all 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
+}
+.demo-control-enabled-text::after {
+  opacity: 0;
+  width: 0.68rem;
+  height: 1em;
+  transform: translate(0, -50%) rotate(0);
+  left: 0.125rem;
+  margin-top: -0.2rem;
+  border: none;
+  background-color: transparent;
+  border-right: 0.125rem solid #fff;
+  border-bottom: 0.125rem solid #fff;
+  transition: all 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
+}
+button[data-scsaver-enabled=true] .demo-control-enabled-text::before {
+  opacity: 0;
+}
+button[data-scsaver-enabled=true] .demo-control-enabled-text::after {
+  transform: translate(0, -50%) rotate(45deg);
+  opacity: 1;
+}
+input:checked + label .demo-control-enabled-text::before {
+  opacity: 0;
+}
+input:checked + label .demo-control-enabled-text::after {
+  transform: translate(0, -50%) rotate(45deg);
+  opacity: 1;
+}
+.demo-control-params {
+  opacity: 0.75;
+}
+.demo-control-params p {
+  margin: 0;
+}
+.demo-control-params p:not(:last-child) {
+  margin-bottom: 0.375rem;
+}
+.demo-control-params-label {
+  opacity: 0.5;
+}
+
+.rainbow {
+  color: #fff;
+  background: linear-gradient(124deg, #ff2400, #e81d1d, #e8b71d, #e3e81d, #1de840, #1ddde8, #2b1de8, #dd00f3, #dd00f3);
+  background-size: 1800% 1800%;
+  -webkit-animation: rainbow 32s ease infinite;
+          animation: rainbow 32s ease infinite;
+}
+
+@-webkit-keyframes rainbow {
+  0% {
+    background-position: 0% 82%;
+  }
+  50% {
+    background-position: 100% 19%;
+  }
+  100% {
+    background-position: 0% 82%;
+  }
+}
+
+@keyframes rainbow {
+  0% {
+    background-position: 0% 82%;
+  }
+  50% {
+    background-position: 100% 19%;
+  }
+  100% {
+    background-position: 0% 82%;
+  }
+}/*# sourceMappingURL=custom.css.map */

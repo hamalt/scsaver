@@ -2,8 +2,7 @@
 sidebar_label: Options
 sidebar_position: 3
 title: Options | Scsaver.js Documents
-# description: 
-# image: 
+description: About Scsaver.js options.
 keywords: [Scsaver.js, Options]
 ---
 

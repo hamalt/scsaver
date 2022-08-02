@@ -2,7 +2,7 @@
 sidebar_label: Methods
 sidebar_position: 4
 title: Methods | Scsaver.js Documents
-# description: 
+description: About methods of Scsaver.js.
 # image: 
 keywords: [scsaver.js, Methods]
 ---

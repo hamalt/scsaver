@@ -2,7 +2,7 @@
 sidebar_label: Scsaver.js
 sidebar_position: 1
 title: Readme | Scsaver.js Documents
-# description: 
+description: An overview of Scsaver.js. Envisioned use cases, etc.
 # image: 
 keywords: [Scsaver.js, Readme]
 ---
@@ -21,7 +21,7 @@ It is a JavaScript library to realize the function of the screen saver on the we
 This program was used in an interactive video for booth installation.  
 (I created it because I had to display a different video or image than the interactive video if there was no action.)
 
-## Assumed use case
+## Envisioned use cases
 
 - Screensaver for interactive video.
 - Screensaver for tablet ordering system.

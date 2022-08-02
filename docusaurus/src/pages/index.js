@@ -6,6 +6,8 @@ import Layout from '@theme/Layout';
 import HomepageFeatures from '@site/src/components/HomepageFeatures';
 import Head from '@docusaurus/Head';
 import useBaseUrl from '@docusaurus/useBaseUrl';
+import Logo from '@site/static/img/logo.svg';
+
 
 // import styles from './index.module.css';
 
@@ -33,6 +35,7 @@ function HomepageCover() {
     return (
       <header id="demo-cover" className="cover">
         <div className="cover-inner">
+          <Logo className="cover-logo" />
           <h1>{siteConfig.title}<small>0.1.5</small></h1>
 
           <p className="cover-tagline">{siteConfig.tagline}</p>
@@ -66,13 +69,6 @@ function HomepageCover() {
             <Link to="/docs/getting-started">Get Started</Link>
           </div>
         </div>
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
-              console.log("component!!");
-            `
-          }}
-        />
       </header>
     );
 }
@@ -80,9 +76,6 @@ function HomepageCover() {
 export default function Home() {
   const { siteConfig } = useDocusaurusContext();
   useEffect(() => {
-    // demoTest();
-    console.log("useEffect on Home");
-
   const option = {
     waitTime: 2000,
     showFadeTime: 300,
@@ -112,13 +105,7 @@ export default function Home() {
         });
 
         document.getElementById('scsaver-event-interval').innerText = this.settings.doInterval;
-      },
-      // showStart: function(e) {
-      //   console.log("showStart");
-      // },
-      // hideStart: function(e) {
-      //   console.log("hideStart");
-      // },
+      }
     }
   }
 
@@ -139,23 +126,18 @@ export default function Home() {
     }
   });
   }, []);
-  // useEffect(() => {
-  //   // Only logged in the browser console; nothing is logged during server-side rendering
-  //   console.log("I'm now in the browser");
-  // }, []);
   return (
     <Layout
-      title={`Hello from ${siteConfig.title}`}
-      description="Description will go into a meta tag in <head />">
+      description="A screensaver library made with vanilla JavaScript that works on web pages. 
+Customization is a prerequisite.">
       <Head>
-        <meta property="og:description" content="My custom description" />
+        {/* <meta property="og:description" content="My custom description" /> */}
         <meta charSet="utf-8" />
         <title>Scsaver.js | Web page screensaver JavaScript library.</title>
         <link rel="stylesheet" href={useBaseUrl('/js/scsaver/scsaver.css?ver=0.1.5')} />
-        {/* <script src={useBaseUrl('/js/scsaver/scsaver.min.js?ver=0.1.5')} />;
-        <script src={useBaseUrl('/js/demo.js')} />; */}
+        <meta property="og:type" content="website" />
+        <meta property="og:title" content="Scsaver.js | Web page screensaver JavaScript library." />
       </Head>
-      
       <HomepageCover />
       <main>
         <HomepageFeatures />

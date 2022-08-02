@@ -25,17 +25,19 @@
 }
 
 /* For readability concerns, you should choose a lighter palette in dark mode. */
-[data-theme='dark'] {
-  --ifm-color-primary: #91a3ee;
-  --ifm-color-primary-dark: #7087e9;
-  --ifm-color-primary-darker: #5f79e6;
-  --ifm-color-primary-darkest: #2d50df;
-  --ifm-color-primary-light: #b2bff3;
-  --ifm-color-primary-lighter: #c3cdf6;
-  --ifm-color-primary-lightest: #f5f6fd;
+html[data-theme='dark'] {
+  --ifm-color-primary: #989de2;
+  --ifm-color-primary-dark: #7b81da;
+  --ifm-color-primary-darker: #6c73d6;
+  --ifm-color-primary-darkest: #666dd4;
+  --ifm-color-primary-light: #b5b9ea;
+  --ifm-color-primary-lighter: #c4c7ee;
+  --ifm-color-primary-lightest: #f0f1fb;
+  --ifm-background-color: #000419;
+
 
   // html tag
-  --ifm-background-color: #000419 !important;
+  // --ifm-background-color: #000419 !important;
 }
 
 //Docusaurus custom
@@ -61,15 +63,20 @@ html:not(.docs-doc-page) {
   /* top: 0;
   left: 0;
   z-index: 999; */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   position: relative;
   align-items: center;
   background-position: 50%;
   background-repeat: no-repeat;
   background-size: cover;
-  height: 100vh;
+  min-height: 100vh;
   width: 100%;
   background-color: #000419;
   color: var(--ifm-color-primary-light);
+  padding: 5rem 0;
 
   &-inner {
     display: flex;
@@ -78,6 +85,10 @@ html:not(.docs-doc-page) {
     align-items: center;
     height: 100%;
     width: 100%;
+  }
+
+  .scsaver {
+    position: absolute;
   }
 
   a {
@@ -129,7 +140,9 @@ html:not(.docs-doc-page) {
     font-weight: 300;
     margin: .625rem 0 0;
     position: relative;
-    text-align: center
+    text-align: center;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 900;
 
     a {
       display: block;
@@ -140,6 +153,11 @@ html:not(.docs-doc-page) {
       font-size: 1rem;
       position: absolute;
     }
+  }
+
+  &-logo {
+    width: 8rem;
+    height: 8rem;
   }
 
   &-tagline {

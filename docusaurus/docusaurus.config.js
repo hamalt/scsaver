@@ -26,6 +26,22 @@ const config = {
     locales: ['en', 'jp'],
   },
 
+  stylesheets: [
+    {
+      rel: 'preconnect',
+      href: 'https://fonts.googleapis.com',
+    },
+    {
+      rel: 'preconnect',
+      href: 'https://fonts.gstatic.com',
+      crossorigin: true,
+    },
+    {
+      rel: 'stylesheet',
+      href: 'https://fonts.googleapis.com/css2?family=Montserrat:wght@100;700;900&display=swap'
+    },
+  ],
+
   scripts: [
     {
       src: 'https://cdn.jsdelivr.net/npm/scsaver@latest/dist/scsaver.min.js',
@@ -62,6 +78,12 @@ const config = {
   themeConfig:
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
+      metadata: [
+        {
+          property: 'og:image',
+          content: '/scsaver/img/scsaver_github_ogp.png',
+        }
+      ],
       colorMode: {
         defaultMode: 'dark',
         disableSwitch: true,

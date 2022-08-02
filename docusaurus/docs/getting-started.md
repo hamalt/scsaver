@@ -2,8 +2,7 @@
 sidebar_label: Getting Started
 sidebar_position: 2
 title: Getting Started | Scsaver.js Documents
-# description: 
-# image: 
+description: How to getting started with Scsaver.js.
 keywords: [Scsaver.js, Getting Started]
 ---
 
