@@ -17,7 +17,7 @@ jobs:
         with:
           node-version: 'lts/*'
       - name: Install dependencies
-        run: npm ci
+        run: yarn install --immutable --immutable-cache --check-cache
       - name: Release
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
