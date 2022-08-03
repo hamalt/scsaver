@@ -15,6 +15,11 @@
     "doc-md": "documentation build src/** -f md -o docs.md",
     "npm-upgrade": "yarn upgrade --latest"
   },
+  "release": {
+    "branches": [
+      "main"
+    ]
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/hamalt/scsaver.git"
@@ -48,7 +53,8 @@
     "rollup": "^2.77.0",
     "rollup-plugin-esbuild": "^4.9.1",
     "rollup-plugin-livereload": "^2.0.5",
-    "rollup-plugin-serve": "^2.0.0"
+    "rollup-plugin-serve": "^2.0.0",
+    "semantic-release": "^19.0.3"
   },
   "dependencies": {}
 }
