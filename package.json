@@ -1,6 +1,6 @@
 {
   "name": "scsaver",
-  "version": "0.1.5",
+  "version": "0.0.0-development",
   "description": "Web page screensaver JavaScript library.",
   "main": "dist/scsaver.cjs.js",
   "module": "dist/scsaver.es.js",
@@ -13,7 +13,8 @@
     "lint-fix": "eslint --cache --fix src/**/*.js && prettier --write src/**/*.js",
     "doc-html": "documentation build src/** -f html -o docs",
     "doc-md": "documentation build src/** -f md -o docs.md",
-    "npm-upgrade": "yarn upgrade --latest"
+    "npm-upgrade": "yarn upgrade --latest",
+    "semantic-release": "semantic-release"
   },
   "release": {
     "branches": [
@@ -22,7 +23,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/hamalt/scsaver.git"
+    "url": "https://github.com/hamalt/scsaver.git"
   },
   "keywords": [
     "scsaver",
