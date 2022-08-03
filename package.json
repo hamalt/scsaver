@@ -1,6 +1,6 @@
 {
   "name": "scsaver",
-  "version": "0.0.0-development",
+  "version": "0.1.6",
   "description": "Web page screensaver JavaScript library.",
   "main": "dist/scsaver.cjs.js",
   "module": "dist/scsaver.es.js",
