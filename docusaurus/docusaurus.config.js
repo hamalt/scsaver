@@ -9,8 +9,8 @@ const path = require('path');
 const config = {
   title: 'Scsaver.js',
   tagline: 'Web page screensaver JavaScript library.',
-  url: 'https://hamalt.github.io/',
-  baseUrl: '/scsaver/',
+  url: 'https://scsaver.js.org',
+  baseUrl: '/',
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'warn',
   favicon: 'img/favicon.ico',
@@ -81,7 +81,7 @@ const config = {
       metadata: [
         {
           property: 'og:image',
-          content: 'https://hamalt.github.io/scsaver/img/scsaver_github_ogp.png',
+          content: 'https://scsaver.js.org/img/scsaver_github_ogp.png',
         }
       ],
       colorMode: {
