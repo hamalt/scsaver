@@ -81,7 +81,7 @@ const config = {
       metadata: [
         {
           property: 'og:image',
-          content: '/scsaver/img/scsaver_github_ogp.png',
+          content: 'https://hamalt.github.io/scsaver/img/scsaver_github_ogp.png',
         }
       ],
       colorMode: {
