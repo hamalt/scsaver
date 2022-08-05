@@ -2,7 +2,7 @@
 
 # Scsaver.js
 
-[DEMO & Document](https://hamalt.github.io/scsaver/)
+[DEMO & Document](https://scsaver.js.org)
 
 [![Latest Release](https://img.shields.io/github/tag/hamalt/scsaver.svg?label=release)](https://github.com/hamalt/scsaver/releases/latest) [![npm version](https://badge.fury.io/js/scsaver.svg)](https://badge.fury.io/js/scsaver) [![Stars](https://img.shields.io/github/stars/hamalt/scsaver.svg)](https://github.com/hamalt/scsaver/stargazers) [![License](https://img.shields.io/github/license/hamalt/scsaver.svg)](LICENSE)
 

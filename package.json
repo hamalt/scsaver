@@ -46,7 +46,7 @@
   "bugs": {
     "url": "https://github.com/hamalt/scsaver/issues"
   },
-  "homepage": "https://github.com/hamalt/scsaver#readme",
+  "homepage": "https://scsaver.js.org",
   "devDependencies": {
     "@babel/core": "^7.18.9",
     "@babel/preset-env": "^7.18.9",
