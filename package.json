@@ -11,8 +11,6 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "eslint --cache --fix src/**/*.js",
     "lint-fix": "eslint --cache --fix src/**/*.js && prettier --write src/**/*.js",
-    "doc-html": "documentation build src/** -f html -o docs",
-    "doc-md": "documentation build src/** -f md -o docs.md",
     "npm-upgrade": "yarn upgrade --latest",
     "semantic-release": "semantic-release"
   },
