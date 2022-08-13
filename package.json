@@ -8,7 +8,7 @@
   "scripts": {
     "dev": "rollup -c -w --environment ROLLUP_WATCH",
     "build": "rollup -c",
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest",
     "lint": "eslint --cache --fix src/**/*.js",
     "lint-fix": "eslint --cache --fix src/**/*.js && prettier --write src/**/*.js",
     "npm-upgrade": "yarn upgrade --latest",
@@ -58,6 +58,7 @@
     "esbuild": "^0.15.0",
     "eslint": "^8.20.0",
     "eslint-config-prettier": "^8.5.0",
+    "jest": "^28.1.3",
     "prettier": "^2.7.1",
     "rollup": "^2.77.0",
     "rollup-plugin-esbuild": "^4.9.1",
