@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scsaver demo</title>
+
+    <link rel="stylesheet" href="../src/style.css">
+    <link rel="stylesheet" href="../src/scsaver.css">
+    <script src="../dist/scsaver.js"></script>
+</head>
+<body>
+    <h1>Develop, Demo.</h1>
+    <p>This is screensaver library with JavaScript.</p>
+
+    <div id="scsaver" class="scsaver black-rainbow">
+        <div class="scsaver-inner">
+            <p>Hello, Scsaver.</p>
+        </div>
+    </div>
+
+    <div id="monitor">
+        <p><span id=""></span></p>
+    </div>
+
+    <script>
+      const option = {
+          waitTime : 2000,
+          events: [
+            'mousemove',
+            'click'
+          ],
+          progressBar: true,
+          progressBarParent: '#monitor',
+          on: {
+              waitStart: function() {
+                  console.log('waitStart Param');
+              },
+              showStart: function() {
+                  console.log('showStart Param');
+              },
+          }
+      }
+      const scsaver = new Scsaver('.scsaver', option);
+    </script>
+</body>
+</html>
