@@ -17,6 +17,9 @@
     "npm-upgrade": "yarn upgrade --latest",
     "semantic-release": "semantic-release"
   },
+  "files": [
+    "dist"
+  ],
   "release": {
     "branches": [
       "main"
