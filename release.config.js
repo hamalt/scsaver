@@ -55,7 +55,7 @@ module.exports = {
     [
       "@semantic-release/release-notes-generator",
       {
-        preset: "conventionalcommits",
+        // preset: "conventionalcommits",
         presetConfig: {
           // types: types.map(({ type, section, hidden }) => ({
           //   type,
@@ -94,6 +94,7 @@ module.exports = {
       {
         // files to commit
         assets: [
+          "dist/**/*",
           "package.json", // to commit changes in the version field
           "package-lock.json", // to commit changes in the version field
           changelogFile, // to commit changes in changelogFile
