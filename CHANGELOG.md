@@ -1,3 +1,11 @@
+## [0.3.4](https://github.com/hamalt/scsaver/compare/v0.3.3...v0.3.4) (2022-08-15)
+
+
+### Bug Fixes
+
+* Fixed Cypress test automation code. ([2056820](https://github.com/hamalt/scsaver/commit/205682024d93663e974fd81313b87246c4ef658b))
+* Fixed version number. ([cb90bb9](https://github.com/hamalt/scsaver/commit/cb90bb92e672a4463308906612e1dbceda7d5cc2))
+
 ## [0.3.3](https://github.com/hamalt/scsaver/compare/v0.3.2...v0.3.3) (2022-08-15)
 
 
