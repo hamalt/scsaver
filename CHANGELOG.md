@@ -1,3 +1,10 @@
+## [0.3.5](https://github.com/hamalt/scsaver/compare/v0.3.4...v0.3.5) (2022-08-15)
+
+
+### Bug Fixes
+
+* Fixed dist dir is not included in npm publish [#60](https://github.com/hamalt/scsaver/issues/60) ([e33c093](https://github.com/hamalt/scsaver/commit/e33c0934eb1f05785f979d85c08f096e0206e3fd))
+
 ## [0.3.4](https://github.com/hamalt/scsaver/compare/v0.3.3...v0.3.4) (2022-08-15)
 
 
