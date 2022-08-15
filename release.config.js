@@ -86,20 +86,6 @@ module.exports = {
       },
     ],
     /**
-     * Publish GitHub releases and leave comments on released pull requests and issues.You can also upload assets to releases.
-     * @see https://github.com/semantic-release/github
-     */
-    [
-      "@semantic-release/github",
-      {
-        // Labels for related issues and PRs
-        releasedLabels: ["released", "released-in-${nextRelease.gitTag}"],
-        // Comments left on related issues and PRs
-        successComment:
-          "🎉 This ${issue.pull_request ? 'pull request' : 'issue'} is included in version ${nextRelease.gitTag}.",
-      },
-    ],
-    /**
      * Commit the assets generated during the release to your Git repository.
      * @see https://github.com/semantic-release/git
      */
@@ -115,6 +101,23 @@ module.exports = {
         // commit message
         message:
           "release: 🏹 ${nextRelease.gitTag} [skip ci]\n\n${nextRelease.notes}",
+      },
+    ],
+    /**
+     * Publish GitHub releases and leave comments on released pull requests and issues.You can also upload assets to releases.
+     * @see https://github.com/semantic-release/github
+     */
+    [
+      "@semantic-release/github",
+      {
+        // Labels for related issues and PRs
+        releasedLabels: ["released", "released-in-${nextRelease.gitTag}"],
+        // Comments left on related issues and PRs
+        successComment:
+          "🎉 This ${issue.pull_request ? 'pull request' : 'issue'} is included in version ${nextRelease.gitTag}.",
+        assets: [
+          {"path": "dist/**/*.js", "label": "JS distribution"}
+        ]
       },
     ],
     /**
