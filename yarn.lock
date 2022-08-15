@@ -1008,9 +1008,9 @@
   integrity sha512-pe7L+LnITFHUSUnuhSQRyYN2E5Anl0r7x/jW+ufc+4fBcaK3Q51b/3ufFWWhmIiuCkr7oKtmVSpaJ1DxbtSfuw==
 
 "@eslint/create-config@^0.3.0":
-  version "0.3.0"
-  resolved "https://registry.yarnpkg.com/@eslint/create-config/-/create-config-0.3.0.tgz#0f4bdd9f137044d9a65feac3f3689febb0c9ed6c"
-  integrity sha512-utnrGDAJqYEtt2pLg5SWRRxV7BO/oG1Q/Kl9vn/H0dRMP2zl5jyXudlb8rJA6vVYhmKnyq1S/DG5DpubDWremA==
+  version "0.3.1"
+  resolved "https://registry.yarnpkg.com/@eslint/create-config/-/create-config-0.3.1.tgz#3d9786225510a0d044860031d0688437a29592ec"
+  integrity sha512-SXtoYRzmGfeN4Jh8+0YObl1N7hobUtTKCZ+dt2NQnXMAUc/TQ6Rd8z5JZouat3JBWJZvgE2tzFIxQ/FZS4ggww==
   dependencies:
     "@eslint/eslintrc" "^1.0.3"
     cross-spawn "^7.0.2"
