@@ -18,7 +18,7 @@ jobs:
           node-version: 'lts/*'
       - name: Install dependencies
         run: yarn install --immutable --immutable-cache --check-cache
-      - name: Build library
+      - name: Build Scsaver.js
         run: npm run build
       - name: Release
         env:
