@@ -1,3 +1,10 @@
+## [0.4.1](https://github.com/hamalt/scsaver/compare/v0.4.0...v0.4.1) (2022-08-15)
+
+
+### Bug Fixes
+
+* semantic-release plugin order [#60](https://github.com/hamalt/scsaver/issues/60) ([ec7fdc7](https://github.com/hamalt/scsaver/commit/ec7fdc7335a13c2108eb6d8ed54d0235cbbfdd55))
+
 # [0.4.0](https://github.com/hamalt/scsaver/compare/v0.3.7...v0.4.0) (2022-08-15)
 
 
