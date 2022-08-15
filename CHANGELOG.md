@@ -1,3 +1,15 @@
+# [0.4.0](https://github.com/hamalt/scsaver/compare/v0.3.7...v0.4.0) (2022-08-15)
+
+
+### Bug Fixes
+
+* Fixed semantic-release config [#76](https://github.com/hamalt/scsaver/issues/76) ([b166c67](https://github.com/hamalt/scsaver/commit/b166c67e5f0c9b8781ea7449bd7af24c0d3f528c))
+
+
+### Features
+
+* Support dist dir for npm [#76](https://github.com/hamalt/scsaver/issues/76) ([abb6881](https://github.com/hamalt/scsaver/commit/abb6881a1294b1632e6f50ab98133695aeae92ab))
+
 ## [0.3.7](https://github.com/hamalt/scsaver/compare/v0.3.6...v0.3.7) (2022-08-15)
 
 
