@@ -38,7 +38,7 @@ module.exports = {
     [
       "@semantic-release/commit-analyzer",
       {
-        preset: "conventionalcommits",
+        // preset: "conventionalcommits",
         releaseRules: [
           { breaking: true, release: "major" },
           { revert: true, release: "patch" },
