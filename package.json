@@ -15,9 +15,6 @@
     "npm-upgrade": "yarn upgrade --latest",
     "semantic-release": "semantic-release"
   },
-  "files": [
-    "dist"
-  ],
   "repository": {
     "type": "git",
     "url": "https://github.com/hamalt/scsaver.git"
