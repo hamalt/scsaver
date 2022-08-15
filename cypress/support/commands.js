@@ -34,30 +34,21 @@ Cypress.Commands.add(
     return cy.window().then((_window) => {
       _window.document.body.innerHTML = `
       ${
-        config.progressBarParent
+        config.progressBar
           ? `
       <div class="scsaver progress-bar-parent"></div>`
           : ''
       }
       <div class="scsaver black-rainbow">
         <div class="scsaver-inner">
-            <p>Hello, Scsaver.</p>
+            <p>Hello, Scsaver. Inner</p>
         </div>
       </div>
       `;
       // eslint-disable-next-line dot-notation
       const _config = config;
-      if (!_config.waitTime) {
-        _config.waitTime = 2000;
-      }
-      if (config.events) {
-        _config.events = [
-          'mousemove',
-          'click'
-        ];
-      }
       if (config.progressBar) {
-        _config.progressBar = true
+        _config.progressBar = false
       }
       _window.scsaverRef = new _window.Scsaver(el, _config);
       return _window.scsaverRef;
