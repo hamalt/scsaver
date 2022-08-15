@@ -1,3 +1,11 @@
+## [0.3.6](https://github.com/hamalt/scsaver/compare/v0.3.5...v0.3.6) (2022-08-15)
+
+
+### Bug Fixes
+
+* Changed semantic-release config [#76](https://github.com/hamalt/scsaver/issues/76) ([06ff612](https://github.com/hamalt/scsaver/commit/06ff61292d3e78278c64513ddca410e2bdee8079))
+* Fixed semantic-release config [#76](https://github.com/hamalt/scsaver/issues/76) ([a58986d](https://github.com/hamalt/scsaver/commit/a58986da5d42ff1778528cc2ab20f4ea05b575ff))
+
 ## [0.3.5](https://github.com/hamalt/scsaver/compare/v0.3.4...v0.3.5) (2022-08-15)
 
 
