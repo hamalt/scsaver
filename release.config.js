@@ -6,7 +6,7 @@
  * @see {@link https://github.com/semantic-release/semantic-release/blob/971a5e0d16f1a32e117e9ce382a1618c8256d0d9/lib/get-config.js#L56} for about default config.
  */
 
-const types = require("./commit-types.config");
+// const types = require("./commit-types.config");
 const defaultBranch = "main"; // or "master"
 const changelogFile = "CHANGELOG.md";
 
@@ -42,9 +42,9 @@ module.exports = {
         releaseRules: [
           { breaking: true, release: "major" },
           { revert: true, release: "patch" },
-          ...types.flatMap(({ type, release }) =>
-            release ? [{ type, release }] : []
-          ),
+          // ...types.flatMap(({ type, release }) =>
+          //   release ? [{ type, release }] : []
+          // ),
         ],
       },
     ],
@@ -57,11 +57,11 @@ module.exports = {
       {
         preset: "conventionalcommits",
         presetConfig: {
-          types: types.map(({ type, section, hidden }) => ({
-            type,
-            section,
-            hidden: hidden ?? true,
-          })),
+          // types: types.map(({ type, section, hidden }) => ({
+          //   type,
+          //   section,
+          //   hidden: hidden ?? true,
+          // })),
         },
       },
     ],
