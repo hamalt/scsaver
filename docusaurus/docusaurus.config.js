@@ -44,7 +44,7 @@ const config = {
 
   scripts: [
     {
-      src: 'https://cdn.jsdelivr.net/npm/scsaver@latest/dist/scsaver.min.js',
+      src: 'https://cdn.jsdelivr.net/npm/scsaver/dist/scsaver.min.js',
       async: false,
     }
   ],
