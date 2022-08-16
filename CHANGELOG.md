@@ -1,3 +1,10 @@
+## [0.5.3](https://github.com/hamalt/scsaver/compare/v0.5.2...v0.5.3) (2022-08-16)
+
+
+### Bug Fixes
+
+* Changed release function order ([416052c](https://github.com/hamalt/scsaver/commit/416052cae0781bfa4518b043ebf31c3a97caedac))
+
 ## [0.5.2](https://github.com/hamalt/scsaver/compare/v0.5.1...v0.5.2) (2022-08-16)
 
 
