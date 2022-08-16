@@ -1,0 +1,16 @@
+body {
+  margin: 0;
+}
+
+h1, p {
+  margin: 0;
+}
+
+#monitor {
+  position: fixed;
+  width: 200px;
+  height: 400px;
+  overflow: hidden;
+  color: #fff;
+  background-color: #000;
+}
