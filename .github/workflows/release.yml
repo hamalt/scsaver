@@ -20,6 +20,8 @@ jobs:
         run: yarn install --immutable --immutable-cache --check-cache
       - name: Build Scsaver.js files
         run: npm run build
+      - name: ZIP build
+        run: zip -r dist.zip dist
       - name: Release
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}

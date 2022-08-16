@@ -116,7 +116,7 @@ module.exports = {
         successComment:
           "🎉 This ${issue.pull_request ? 'pull request' : 'issue'} is included in version ${nextRelease.gitTag}.",
         assets: [
-          {"path": "dist/**/*.js", "label": "JS distribution"}
+          {"path":"dist.zip", "label":"distribution-${nextRelease.gitTag}.zip"}
         ]
       },
     ],
