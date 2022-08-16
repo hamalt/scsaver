@@ -1,3 +1,10 @@
+## [0.5.2](https://github.com/hamalt/scsaver/compare/v0.5.1...v0.5.2) (2022-08-16)
+
+
+### Bug Fixes
+
+* Fixed E2E test base html ([dfba8f7](https://github.com/hamalt/scsaver/commit/dfba8f72158fdeba2fa4317433ddedd3ee1b1210))
+
 ## [0.5.1](https://github.com/hamalt/scsaver/compare/v0.5.0...v0.5.1) (2022-08-16)
 
 
