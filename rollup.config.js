@@ -5,6 +5,7 @@ import esbuild from 'rollup-plugin-esbuild';
 import livereload from 'rollup-plugin-livereload';
 import serve from 'rollup-plugin-serve';
 import eslint from '@rollup/plugin-eslint';
+import scss from 'rollup-plugin-scss';
 
 import * as path from 'path';
 
@@ -34,7 +35,7 @@ export default [
         name: moduleNameUpper,
         file: pkg.browser,
         format: 'iife',
-        sourcemap: 'inline',
+        sourcemap: production ? false : 'inline',
         banner
       },
       // minified
@@ -53,6 +54,11 @@ export default [
       }
     ],
     plugins: [
+      scss({
+        output: 'dist/scsaver.min.css',
+        sourceMap: !production,
+        outputStyle: production ? 'compressed' : 'expanded',
+      }),
       pluginCommonjs({
         extensions: ['.js', '.ts'],
       }),
@@ -89,6 +95,9 @@ export default [
       ...Object.keys(pkg.devDependencies || {}),
     ],
     plugins: [
+      scss({
+        output: false
+      }),
       pluginCommonjs({
         extensions: ['.js', '.ts'],
       }),
@@ -119,6 +128,9 @@ export default [
       ...Object.keys(pkg.devDependencies || {}),
     ],
     plugins: [
+      scss({
+        output: false
+      }),
       pluginCommonjs({
         extensions: ['.js', '.ts'],
       }),
