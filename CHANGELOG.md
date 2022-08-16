@@ -1,3 +1,11 @@
+## [0.5.1](https://github.com/hamalt/scsaver/compare/v0.5.0...v0.5.1) (2022-08-16)
+
+
+### Bug Fixes
+
+* Added dist files to release build [#60](https://github.com/hamalt/scsaver/issues/60) ([8edae05](https://github.com/hamalt/scsaver/commit/8edae05e4939f7987e96b1891fd2bfea4709b775))
+* Remove source map on dist script file ([10bb14a](https://github.com/hamalt/scsaver/commit/10bb14a09e93aefe10bdfb44c09f30ad9ae35fb8))
+
 # [0.5.0](https://github.com/hamalt/scsaver/compare/v0.4.2...v0.5.0) (2022-08-16)
 
 
