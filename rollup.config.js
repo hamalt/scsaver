@@ -43,7 +43,7 @@ export default [
         name: moduleNameUpper,
         file: pkg.browser.replace('.js', '.min.js'),
         format: 'iife',
-        sourcemap: 'inline',
+        sourcemap: production ? false : 'inline',
         banner,
         plugins: [
           esbuild({
