@@ -1,3 +1,15 @@
+# [0.5.0](https://github.com/hamalt/scsaver/compare/v0.4.2...v0.5.0) (2022-08-16)
+
+
+### Bug Fixes
+
+* Fixed demo page code for develop [#77](https://github.com/hamalt/scsaver/issues/77) ([d684be1](https://github.com/hamalt/scsaver/commit/d684be1e03bb2a49fbe181b8bda1a30554ae5d21))
+
+
+### Features
+
+* Included css file to dist dir [#77](https://github.com/hamalt/scsaver/issues/77) ([c7d5460](https://github.com/hamalt/scsaver/commit/c7d5460fc29277e21f1772cf868f177618a0e4b4))
+
 ## [0.4.2](https://github.com/hamalt/scsaver/compare/v0.4.1...v0.4.2) (2022-08-15)
 
 
