@@ -76,16 +76,6 @@ module.exports = {
       },
     ],
     /**
-     * Update package.json version or publish npm package.
-     * @see https://github.com/semantic-release/npm
-     */
-    [
-      "@semantic-release/npm",
-      {
-        npmPublish: true,
-      },
-    ],
-    /**
      * Commit the assets generated during the release to your Git repository.
      * @see https://github.com/semantic-release/git
      */
@@ -101,6 +91,16 @@ module.exports = {
         // commit message
         message:
           "release: 🏹 ${nextRelease.gitTag} [skip ci]\n\n${nextRelease.notes}",
+      },
+    ],
+    /**
+     * Update package.json version or publish npm package.
+     * @see https://github.com/semantic-release/npm
+     */
+    [
+      "@semantic-release/npm",
+      {
+        npmPublish: true,
       },
     ],
     /**
