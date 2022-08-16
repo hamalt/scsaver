@@ -100,6 +100,7 @@ module.exports = {
     [
       "@semantic-release/npm",
       {
+        prepare: 'npm run build',
         npmPublish: true,
       },
     ],
@@ -124,11 +125,11 @@ module.exports = {
      * Run shell commands at various points in the release process.
      * @see https://github.com/semantic-release/exec
      */
-    // [
-    //   "@semantic-release/exec",
-    //   {
-    //     // prepare: "npx typedoc",
-    //   },
-    // ],
+    [
+      "@semantic-release/exec",
+      {
+        // prepare: "npx typedoc",
+      },
+    ],
   ],
 };
