@@ -1,3 +1,10 @@
+## [0.5.5](https://github.com/hamalt/scsaver/compare/v0.5.4...v0.5.5) (2022-08-17)
+
+
+### Bug Fixes
+
+* Tweak release config [#79](https://github.com/hamalt/scsaver/issues/79) ([f101384](https://github.com/hamalt/scsaver/commit/f101384b00d70a7215f3199d53907723d589b26a))
+
 ## [0.5.4](https://github.com/hamalt/scsaver/compare/v0.5.3...v0.5.4) (2022-08-16)
 
 
