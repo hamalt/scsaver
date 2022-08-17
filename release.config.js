@@ -100,7 +100,6 @@ module.exports = {
     [
       "@semantic-release/npm",
       {
-        prepare: 'npm run build',
         npmPublish: true,
       },
     ],
@@ -128,7 +127,7 @@ module.exports = {
     [
       "@semantic-release/exec",
       {
-        prepareCmd: "npm run build",
+        prepareCmd: "npm run build && zip -r dist.zip dist",
       },
     ],
   ],
