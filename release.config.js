@@ -128,7 +128,7 @@ module.exports = {
     [
       "@semantic-release/exec",
       {
-        // prepare: "npx typedoc",
+        prepareCmd: "npm run build",
       },
     ],
   ],
