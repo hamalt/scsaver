@@ -3,7 +3,6 @@ sidebar_label: Scsaver.js
 sidebar_position: 1
 title: Readme | Scsaver.js Documents
 description: An overview of Scsaver.js. Envisioned use cases, etc.
-# image: 
 keywords: [Scsaver.js, Readme]
 ---
 
