@@ -978,10 +978,10 @@
   resolved "https://registry.yarnpkg.com/@esbuild/linux-loong64/-/linux-loong64-0.15.12.tgz#475b33a2631a3d8ca8aa95ee127f9a61d95bf9c1"
   integrity sha512-tZEowDjvU7O7I04GYvWQOS4yyP9E/7YlsB0jjw1Ycukgr2ycEzKyIk5tms5WnLBymaewc6VmRKnn5IJWgK4eFw==
 
-"@eslint/create-config@^0.3.0":
-  version "0.3.1"
-  resolved "https://registry.yarnpkg.com/@eslint/create-config/-/create-config-0.3.1.tgz#3d9786225510a0d044860031d0688437a29592ec"
-  integrity sha512-SXtoYRzmGfeN4Jh8+0YObl1N7hobUtTKCZ+dt2NQnXMAUc/TQ6Rd8z5JZouat3JBWJZvgE2tzFIxQ/FZS4ggww==
+"@eslint/create-config@^0.4.0":
+  version "0.4.0"
+  resolved "https://registry.yarnpkg.com/@eslint/create-config/-/create-config-0.4.0.tgz#5439de161eff3757351f4a35e8bc29590dc8e5d8"
+  integrity sha512-PKWp9NFuGxoyWmyTa5dmuq5to5ENky4dWRhysKwHBay7vT5RxNo7fQmaADrCG8H/I/hi+RakFcb4DmMsgcGbBw==
   dependencies:
     "@eslint/eslintrc" "^1.0.3"
     cross-spawn "^7.0.2"
@@ -989,6 +989,7 @@
     enquirer "^2.3.5"
     js-yaml "^4.1.0"
     json-stable-stringify-without-jsonify "^1.0.1"
+    mri "^1.2.0"
     semver "^7.2.1"
 
 "@eslint/eslintrc@^1.0.3", "@eslint/eslintrc@^1.3.3":
@@ -4284,6 +4285,11 @@ modify-values@^1.0.0:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/modify-values/-/modify-values-1.0.1.tgz#b3939fa605546474e3e3e3c63d64bd43b4ee6022"
   integrity sha512-xV2bxeN6F7oYjZWTe/YPAy6MN2M+sL4u/Rlm2AHCIVGfo2p1yGmBHQ6vHehl4bRTZBdHu3TSkWdYgkwpYzAGSw==
+
+mri@^1.2.0:
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/mri/-/mri-1.2.0.tgz#6721480fec2a11a4889861115a48b6cbe7cc8f0b"
+  integrity sha512-tzzskb3bG8LvYGFF/mDTpq3jpI6Q9wc3LEmBaghu+DdCssd1FakN7Bc0hVNmEyGq1bq3RgfkCb3cmQLpNPOroA==
 
 ms@2.1.2:
   version "2.1.2"
