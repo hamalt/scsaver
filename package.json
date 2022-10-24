@@ -39,7 +39,7 @@
   "devDependencies": {
     "@babel/core": "^7.18.9",
     "@babel/preset-env": "^7.18.9",
-    "@eslint/create-config": "^0.3.0",
+    "@eslint/create-config": "^0.4.0",
     "@rollup/plugin-babel": "^6.0.0",
     "@rollup/plugin-commonjs": "^23.0.0",
     "@rollup/plugin-eslint": "^9.0.0",
