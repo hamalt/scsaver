@@ -36,7 +36,7 @@ function HomepageCover() {
       <header id="demo-cover" className="cover">
         <div className="cover-inner">
           <Logo className="cover-logo" />
-          <h1>{siteConfig.title}<small>0.3.4</small></h1>
+          <h1>{siteConfig.title}<small>0.5.7</small></h1>
 
           <p className="cover-tagline">{siteConfig.tagline}</p>
 
