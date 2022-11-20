@@ -1,3 +1,11 @@
+## [0.5.7](https://github.com/hamalt/scsaver/compare/v0.5.6...v0.5.7) (2022-11-20)
+
+
+### Bug Fixes
+
+* Update document version ([111a90f](https://github.com/hamalt/scsaver/commit/111a90f1e07ef531b6b6da2cf889f9f28372f4c9))
+* Use terser instead of esbuild ([77a4fc8](https://github.com/hamalt/scsaver/commit/77a4fc8a1c317371acbe8fa66fd7753194f9750f))
+
 ## [0.5.6](https://github.com/hamalt/scsaver/compare/v0.5.5...v0.5.6) (2022-08-17)
 
 
