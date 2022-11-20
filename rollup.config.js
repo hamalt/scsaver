@@ -1,7 +1,8 @@
 import pluginCommonjs from '@rollup/plugin-commonjs';
 import pluginNodeResolve from '@rollup/plugin-node-resolve';
 import { babel as pluginBabel } from '@rollup/plugin-babel';
-import esbuild from 'rollup-plugin-esbuild';
+// import esbuild from 'rollup-plugin-esbuild'; // TODO: esbuild is not a function
+import { terser } from "rollup-plugin-terser";
 import livereload from 'rollup-plugin-livereload';
 import serve from 'rollup-plugin-serve';
 import eslint from '@rollup/plugin-eslint';
@@ -46,10 +47,12 @@ export default [
         sourcemap: production ? false : 'inline',
         banner,
         plugins: [
-          esbuild({
-            sourceMap: !production,
-            minify: production,
-          }),
+          // TODO: esbuild is not a function
+          // esbuild({
+          //   sourceMap: !production,
+          //   minify: production,
+          // }),
+          terser()
         ],
       }
     ],
