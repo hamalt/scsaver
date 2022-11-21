@@ -1,3 +1,10 @@
+## [0.5.8](https://github.com/hamalt/scsaver/compare/v0.5.7...v0.5.8) (2022-11-21)
+
+
+### Bug Fixes
+
+* **deps:** update react monorepo to v18 ([db14f9e](https://github.com/hamalt/scsaver/commit/db14f9e0c43a2177851eed145660e71dda626491))
+
 ## [0.5.7](https://github.com/hamalt/scsaver/compare/v0.5.6...v0.5.7) (2022-11-20)
 
 
