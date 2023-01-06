@@ -944,9 +944,9 @@
     lodash.once "^4.1.1"
 
 "@eslint/create-config@^0.4.0":
-  version "0.4.1"
-  resolved "https://registry.yarnpkg.com/@eslint/create-config/-/create-config-0.4.1.tgz#a3344b6a4fa584768fe33cdece37ed1ebb5bdc71"
-  integrity sha512-wSOg7z02CoQQIjfyIA++vfPThS+7PL5na598ZXGbCFIRz0McaJmvxCOvCdCQ6HbxBhFD45ZmZtBEpmbxwFcswA==
+  version "0.4.2"
+  resolved "https://registry.yarnpkg.com/@eslint/create-config/-/create-config-0.4.2.tgz#d2b17d95c27b81f67575c6447558efd4793e0989"
+  integrity sha512-dY1KdOwR4CVvyoYOyXqEpSTe/0XXf8BlH6iSDJFiTnq/mGmXuWq3nIq+ez/JeNQ/ztgqtJl+y0X9S6hFk8Dk1w==
   dependencies:
     "@eslint/eslintrc" "^1.0.3"
     cross-spawn "^7.0.2"
