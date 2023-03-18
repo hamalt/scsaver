@@ -1,3 +1,10 @@
+## [0.5.9](https://github.com/hamalt/scsaver/compare/v0.5.8...v0.5.9) (2023-03-18)
+
+
+### Bug Fixes
+
+* **deps:** update docusaurus monorepo to v2.3.1 ([3a4bfe8](https://github.com/hamalt/scsaver/commit/3a4bfe867bb1e31a67e8a49a9ec1f10c70faed79))
+
 ## [0.5.8](https://github.com/hamalt/scsaver/compare/v0.5.7...v0.5.8) (2022-11-21)
 
 
