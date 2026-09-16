@@ -44,9 +44,9 @@
     "@rollup/plugin-commonjs": "^24.0.0",
     "@rollup/plugin-eslint": "^9.0.0",
     "@rollup/plugin-node-resolve": "^15.0.0",
-    "@semantic-release/changelog": "^6.0.1",
+    "@semantic-release/changelog": "^7.0.0",
     "@semantic-release/exec": "semantic-release/exec",
-    "@semantic-release/git": "^10.0.1",
+    "@semantic-release/git": "^11.0.0",
     "cypress": "^12.0.0",
     "eslint": "^8.20.0",
     "eslint-config-prettier": "^8.5.0",
@@ -57,7 +57,7 @@
     "rollup-plugin-serve": "^2.0.0",
     "rollup-plugin-terser": "^7.0.2",
     "sass": "^1.54.4",
-    "semantic-release": "^19.0.3"
+    "semantic-release": "^25.0.0"
   },
   "dependencies": {}
 }
